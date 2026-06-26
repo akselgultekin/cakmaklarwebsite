@@ -1,0 +1,16 @@
+# Hassas dosyalar
+app/config/config.php
+
+# Upload klasörü (kullanıcı görselleri repoya girmemeli)
+public/uploads/*
+!public/uploads/.gitkeep
+
+# OS & IDE
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# PHP logs
+*.log
+error_log

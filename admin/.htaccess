@@ -1,0 +1,16 @@
+# Admin panel koruma
+# Dizin listelemeyi kapat
+Options -Indexes
+
+# Direkt dosya erişimi sadece login.php ve assets klasörüne
+# Diğer tüm istekler index.php üzerinden
+
+# CSS/JS/img vb. statik dosyalara izin ver
+<FilesMatch "\.(css|js|png|jpg|jpeg|gif|svg|ico|woff2?)$">
+    Require all granted
+</FilesMatch>
+
+# PHP dosyaları için geçiş
+<FilesMatch "\.php$">
+    Require all granted
+</FilesMatch>
