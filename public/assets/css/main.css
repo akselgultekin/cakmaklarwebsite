@@ -1143,6 +1143,10 @@
       font-size: 14px;
     }
     .credit strong { color: var(--turquoise); }
+    @keyframes soft-pulse {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: .45; }
+    }
     .credit-agency {
       display: inline-flex;
       align-items: center;
@@ -1151,10 +1155,11 @@
       font-size: 13px;
       text-decoration: none;
       transition: color .2s;
+      animation: soft-pulse 3.2s ease-in-out infinite;
     }
-    .credit-agency i { color: var(--turquoise); font-size: 12px; }
+    .credit-agency i { color: var(--turquoise); font-size: 11px; }
     .credit-agency strong { color: var(--turquoise); font-weight: 600; }
-    .credit-agency:hover { color: rgba(255,255,255,.9); }
+    .credit-agency:hover { color: rgba(255,255,255,.9); animation: none; }
 
     .ai-widget {
       position: fixed;
