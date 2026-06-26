@@ -213,11 +213,11 @@ ob_start(); ?>
         <?php else: foreach ($result['data'] as $v): ?>
         <tr>
           <td><?php if ($v['cover_image']): ?><img class="td-img" src="<?= e(uploadUrl($v['cover_image'])) ?>"><?php else: ?>—<?php endif; ?></td>
-          <td><strong><?= e($v['title']) ?></strong></td>
+          <td><strong><?= e($v['title'] ?? (($v['brand']??'').' '.($v['model']??''))) ?></strong></td>
           <td><?= e(($v['brand']??'').' '.($v['model']??'')) ?></td>
           <td><?= e($v['year'] ?? '—') ?></td>
           <td><?= $v['km'] ? number_format($v['km']) . ' km' : '—' ?></td>
-          <td><?= formatPrice($v['price'], $v['currency']) ?></td>
+          <td><?= $v['price'] ? formatPrice((float)$v['price']) : '—' ?></td>
           <td><a href="<?= ADMIN_URL ?>/?module=vehicles&action=toggle&id=<?= $v['id'] ?>"><label class="toggle"><input type="checkbox" <?= $v['is_active']?'checked':'' ?> onclick="return false;"><span class="toggle-slider"></span></label></a></td>
           <td>
             <div style="display:flex;gap:6px;">
