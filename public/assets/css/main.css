@@ -18,8 +18,8 @@
     html { scroll-behavior: smooth; }
     body {
       margin: 0;
-      font-family: "Elms Sans", sans-serif;
-      font-weight: 600;
+      font-family: "DM Sans", sans-serif;
+      font-weight: 400;
       color: var(--ink);
       background: var(--soft);
       letter-spacing: 0;
