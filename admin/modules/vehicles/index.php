@@ -113,7 +113,7 @@ if ($action === 'create' || $action === 'edit') {
                   <label>Vites</label>
                   <select class="form-control" name="transmission">
                     <?php foreach (['Otomatik','Manuel','Yarı Otomatik'] as $tr): ?>
-                    <option <?= ($vehicle['transmission']??'')====$tr?'selected':'' ?>><?= $tr ?></option>
+                    <option <?= ($vehicle['transmission']??'')===$tr?'selected':'' ?>><?= $tr ?></option>
                     <?php endforeach; ?>
                   </select>
                 </div>

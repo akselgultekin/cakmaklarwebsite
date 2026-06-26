@@ -275,7 +275,7 @@ ob_start(); ?>
           <td><span class="badge badge-info"><?= e(strtoupper($l['type'])) ?></span></td>
           <td><?= $l['price'] ? formatPrice((float)$l['price']) : '—' ?></td>
           <td><?= e($l['location'] ?? '—') ?></td>
-          <td><?= $l['is_featured'] ? '<span class="badge badge-success">Evet</span>' : '—' ?></td>
+          <td><?= ($l['is_featured'] ?? 0) ? '<span class="badge badge-success">Evet</span>' : '—' ?></td>
           <td><a href="<?= ADMIN_URL ?>/?module=listings&action=toggle&id=<?= $l['id'] ?>"><label class="toggle"><input type="checkbox" <?= $l['is_active']?'checked':'' ?> onclick="return false;"><span class="toggle-slider"></span></label></a></td>
           <td>
             <div style="display:flex;gap:6px;">
