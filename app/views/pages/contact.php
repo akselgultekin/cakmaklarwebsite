@@ -5,11 +5,11 @@ $email    = setting('email', '');
 $address  = setting('address', '');
 $mapEmbed = setting('maps_embed', '');
 ?>
-<section style="min-height:260px;padding:130px 0 60px;background:linear-gradient(90deg,rgba(10,31,68,.72),rgba(10,31,68,.22)),url('https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=2200&q=85') center/cover;">
+<section class="page-hero">
   <div class="container">
     <span class="eyebrow">Bize ulaşın</span>
-    <h1 style="color:#fff;margin:12px 0;">İletişim</h1>
-    <p style="color:rgba(255,255,255,.8);">Sorularınız ve talepleriniz için buradayız.</p>
+    <h1>İletişim</h1>
+    <p>Sorularınız ve talepleriniz için buradayız.</p>
   </div>
 </section>
 

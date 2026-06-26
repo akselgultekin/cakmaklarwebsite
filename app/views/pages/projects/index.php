@@ -1,11 +1,11 @@
 <?php
 $statusLabels = ['satiasta' => 'Satışta', 'yakinda' => 'Yakında', 'teslim_edildi' => 'Tamamlandı'];
 ?>
-<section class="hero" style="min-height:340px;padding:140px 0 80px;background:linear-gradient(90deg,rgba(10,31,68,.68),rgba(10,31,68,.18)),url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=2200&q=85') center/cover;color:#fff;">
+<section class="page-hero">
   <div class="container">
     <span class="eyebrow">Proje portföyü</span>
-    <h1 style="color:#fff;margin:12px 0 16px;">Projelerimiz</h1>
-    <p style="color:rgba(255,255,255,.8);max-width:560px;">Bolu\'da geliştirdiğimiz konut ve karma kullanım projelerini inceleyin.</p>
+    <h1>Projelerimiz</h1>
+    <p>Bolu'da geliştirdiğimiz konut ve karma kullanım projelerini inceleyin.</p>
   </div>
 </section>
 

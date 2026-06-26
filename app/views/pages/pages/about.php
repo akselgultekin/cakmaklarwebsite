@@ -8,7 +8,7 @@ $heroSub   = e($page['subtitle'] ?? 'Güven, Kalite, Deneyim');
 ?>
 
 <!-- HERO -->
-<section class="hero" style="min-height:340px;padding-top:120px;padding-bottom:60px;<?= !empty($page['cover_image']) ? 'background-image:linear-gradient(rgba(10,31,68,.72),rgba(10,31,68,.72)),url('.e(uploadUrl($page['cover_image'])).');background-size:cover;background-position:center;' : '' ?>">
+<section class="page-hero" style="<?= !empty($page['cover_image']) ? 'background-image:linear-gradient(135deg,rgba(10,31,68,.88) 0%,rgba(13,50,114,.75) 55%,rgba(24,198,195,.6) 100%),url('.e(uploadUrl($page['cover_image'])).');background-size:cover;background-position:center;' : '' ?>">
   <div class="container" style="position:relative;z-index:1;">
     <nav style="display:flex;align-items:center;gap:8px;font-size:13px;color:rgba(255,255,255,.65);margin-bottom:24px;">
       <a href="<?= SITE_URL ?>/" style="color:rgba(255,255,255,.65);text-decoration:none;">Ana Sayfa</a>

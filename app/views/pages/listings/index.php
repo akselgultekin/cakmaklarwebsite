@@ -4,11 +4,11 @@ $tagLabels = ['yeni' => 'Yeni', 'firsat' => 'Fırsat', 'krediye_uygun' => 'Kredi
 $baseUrl   = SITE_URL . '/' . ($listing_type === 'satilik' ? 'satilik' : ($listing_type === 'kiralik' ? 'kiralik' : 'ticari'));
 ?>
 
-<section style="min-height:280px;padding:130px 0 60px;background:linear-gradient(90deg,rgba(10,31,68,.72),rgba(10,31,68,.22)),url('https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=2200&q=85') center/cover;color:#fff;">
+<section class="page-hero">
   <div class="container">
     <span class="eyebrow">Portföy</span>
-    <h1 style="color:#fff;margin:12px 0;"><?= e($page_title) ?></h1>
-    <p style="color:rgba(255,255,255,.8);"><?= $paginator['total'] ?> ilan listeleniyor</p>
+    <h1><?= e($page_title) ?></h1>
+    <p><?= $paginator['total'] ?> ilan listeleniyor</p>
   </div>
 </section>
 

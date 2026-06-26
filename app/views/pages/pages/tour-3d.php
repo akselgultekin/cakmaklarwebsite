@@ -5,7 +5,7 @@
 ?>
 
 <!-- ══ HERO ══════════════════════════════════════════════════════════════ -->
-<section class="tour" style="padding:130px 0 80px;background:radial-gradient(circle at 20% 0%,rgba(24,198,195,.22),transparent 40%),var(--navy);color:#fff;overflow:hidden;">
+<section class="page-hero tour" style="background:linear-gradient(135deg,#0A1F44 0%,#0d3272 55%,#18C6C3 100%);overflow:hidden;">
   <div class="container tour-grid" style="align-items:center;">
     <div class="tour-copy">
       <span class="eyebrow">3D Sanal Tur</span>

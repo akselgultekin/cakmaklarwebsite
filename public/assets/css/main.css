@@ -230,6 +230,26 @@
       overflow: hidden;
       background: var(--navy);
     }
+
+    /* İç sayfa hero — mavi → turkuaz gradyan */
+    .page-hero {
+      min-height: 320px;
+      padding: 130px 0 70px;
+      background: linear-gradient(135deg, #0A1F44 0%, #0d3272 55%, #18C6C3 100%);
+      color: #fff;
+      position: relative;
+      overflow: hidden;
+    }
+    .page-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 80% 50%, rgba(24,198,195,.18) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .page-hero .container { position: relative; z-index: 1; }
+    .page-hero h1 { color: #fff; margin: 12px 0 16px; }
+    .page-hero p  { color: rgba(255,255,255,.82); max-width: 580px; font-size: 17px; }
     .slides, .slide {
       min-height: 100svh;
       position: relative;

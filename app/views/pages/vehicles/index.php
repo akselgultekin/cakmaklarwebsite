@@ -1,10 +1,10 @@
 <?php $whatsapp = setting('whatsapp', ''); ?>
 
-<section style="min-height:320px;padding:130px 0 70px;background:linear-gradient(100deg,rgba(6,20,46,.93),rgba(10,31,68,.53)),url('https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=2200&q=85') center/cover;">
+<section class="page-hero">
   <div class="container">
     <span class="eyebrow">Araç portföyü</span>
-    <h1 style="color:#fff;max-width:720px;margin-top:14px;font-size:clamp(44px,6vw,78px);">Seçilmiş araçlar, güvenli ve şeffaf süreç.</h1>
-    <p style="max-width:630px;margin:22px 0;color:rgba(255,255,255,.78);font-size:18px;line-height:1.7;">Çakmaklar İnşaat\'ın premium vitrininde yer alan güncel araç ilanlarını detaylı bilgileriyle inceleyin.</p>
+    <h1>Seçilmiş araçlar, güvenli ve şeffaf süreç.</h1>
+    <p>Çakmaklar İnşaat'ın premium vitrininde yer alan güncel araç ilanlarını inceleyin.</p>
   </div>
 </section>
 

@@ -1,7 +1,7 @@
-<section style="min-height:260px;padding:130px 0 60px;background:linear-gradient(90deg,rgba(10,31,68,.72),rgba(10,31,68,.22)),url('https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=2200&q=85') center/cover;">
+<section class="page-hero">
   <div class="container">
     <span class="eyebrow">Güncel bilgiler</span>
-    <h1 style="color:#fff;margin:12px 0;">Haberler & Duyurular</h1>
+    <h1>Haberler & Duyurular</h1>
   </div>
 </section>
 

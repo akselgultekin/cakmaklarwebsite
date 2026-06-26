@@ -9,7 +9,7 @@ $allImages = array_filter(array_merge(
 $allImages = array_values($allImages);
 ?>
 
-<section style="padding:110px 0 60px;background:linear-gradient(100deg,rgba(6,20,46,.88),rgba(10,31,68,.45)),url('<?= $vehicle['cover_image'] ? e(uploadUrl($vehicle['cover_image'])) : 'https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=2200&q=85' ?>') center/cover;">
+<section class="page-hero" style="<?= $vehicle['cover_image'] ? "background-image:linear-gradient(135deg,rgba(10,31,68,.88) 0%,rgba(13,50,114,.75) 55%,rgba(24,198,195,.5) 100%),url('".e(uploadUrl($vehicle['cover_image']))."');background-size:cover;background-position:center;" : '' ?>">
   <div class="container">
     <span class="eyebrow">Araç ilanı</span>
     <h1 style="color:#fff;margin:14px 0;"><?= e($vehicle['year'] . ' ' . $vehicle['brand'] . ' ' . $vehicle['model']) ?></h1>
