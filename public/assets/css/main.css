@@ -1151,7 +1151,7 @@
     .credit strong { color: var(--turquoise); }
     /* ── Footer Logo ── */
     .footer-logo-img-wrap { display: inline-block; }
-    .footer-logo-img { max-height: 64px; max-width: 200px; width: auto; object-fit: contain; filter: brightness(0) invert(1); }
+    .footer-logo-img { max-height: 48px; max-width: 160px; width: auto; object-fit: contain; }
     /* ── 404 ── */
     .page-404-hero {
       min-height: 80vh;
