@@ -116,15 +116,3 @@
   </div>
 </section>
 
-<!-- ══ CTA ══════════════════════════════════════════════════════════════ -->
-<section class="footer-cta" style="padding:80px 0;">
-  <div class="container" style="text-align:center;">
-    <h2 style="color:#fff;margin-bottom:16px;">Projenizi 3D Olarak Keşfedin</h2>
-    <p style="color:rgba(255,255,255,.75);margin-bottom:36px;max-width:500px;margin-left:auto;margin-right:auto;">
-      Satış ofisinize 3D ev gezme sistemini entegre etmek için bizimle iletişime geçin.
-    </p>
-    <a class="btn" href="<?= SITE_URL ?>/iletisim" style="background:#fff;color:var(--navy);">
-      <i class="fa-solid fa-phone"></i> İletişime Geç
-    </a>
-  </div>
-</section>
