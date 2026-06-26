@@ -11,12 +11,6 @@ $footerText = setting('footer_text', '© ' . date('Y') . ' Çakmaklar İnşaat. 
 ?>
 
 <?php if ($whatsapp): ?>
-<a href="<?= e(whatsappUrl($whatsapp)) ?>" target="_blank" rel="noopener" class="wa-float" aria-label="WhatsApp ile iletişim">
-  <i class="fa-brands fa-whatsapp"></i>
-</a>
-<?php endif; ?>
-
-<?php if ($whatsapp): ?>
 <a href="<?= e(whatsappUrl($whatsapp)) ?>" target="_blank" rel="noopener" class="wa-float" aria-label="WhatsApp ile iletişime geçin">
   <span class="wa-tooltip">WhatsApp ile iletişime geçin</span>
   <i class="fa-brands fa-whatsapp"></i>
@@ -48,10 +42,17 @@ $footerText = setting('footer_text', '© ' . date('Y') . ' Çakmaklar İnşaat. 
   <div class="container">
     <div class="footer-grid">
       <div>
+        <?php $footerLogo = setting('logo', ''); ?>
+        <?php if ($footerLogo): ?>
+        <a href="<?= SITE_URL ?>" class="footer-logo-img-wrap">
+          <img src="<?= e(uploadUrl($footerLogo)) ?>" alt="<?= e(SITE_NAME) ?>" class="footer-logo-img">
+        </a>
+        <?php else: ?>
         <div class="logo">
           <span class="logo-mark">Ç</span>
           <span><?= e(SITE_NAME) ?></span>
         </div>
+        <?php endif; ?>
         <p style="margin-top:18px; max-width:340px;"><?= e(setting('site_slogan', 'Güvenilir yapılar, kalıcı değerler.')) ?></p>
         <div class="socials">
           <?php if ($facebook): ?><a href="<?= e($facebook) ?>" target="_blank" rel="noopener" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a><?php endif; ?>

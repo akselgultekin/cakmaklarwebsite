@@ -77,6 +77,12 @@ class Router
     private function notFound(): void
     {
         http_response_code(404);
+        $meta_title  = '404 — Sayfa Bulunamadı | ' . (defined('SITE_NAME') ? SITE_NAME : 'Çakmaklar İnşaat');
+        $meta_desc   = 'Aradığınız sayfa taşınmış, silinmiş veya hiç var olmamış olabilir.';
+        $meta_noindex = true;
+        ob_start();
         require_once APP_PATH . '/views/pages/404.php';
+        $content = ob_get_clean();
+        require APP_PATH . '/views/layouts/default.php';
     }
 }
