@@ -165,7 +165,7 @@ $whatsapp = setting('whatsapp', '');
       <span class="eyebrow">Dijital satış deneyimi</span>
       <h2>Projeleri sadece göstermiyoruz, müşteriye yaşatıyoruz.</h2>
       <p>Satış ofisindeki TV ekranı, tablet ve telefon deneyimleri aynı marka diliyle birleşir; müşteri projeyi görsel, plan, 360° tur ve hızlı iletişim akışıyla keşfeder.</p>
-      <div style="margin-top:28px;"><a class="btn section-cta" href="<?= SITE_URL ?>/3d-ev-gez"><i class="fa-solid fa-cube"></i> 3D Deneyimi Keşfet</a></div>
+      <div style="margin-top:28px;"><a class="btn ghost" href="<?= SITE_URL ?>/3d-ev-gez"><i class="fa-solid fa-cube"></i> 3D Deneyimi Keşfet</a></div>
     </div>
   </div>
 </section>
@@ -310,7 +310,7 @@ $whatsapp = setting('whatsapp', '');
         <button class="room-btn" data-room="banyo"><i class="fa-solid fa-bath"></i> Banyo</button>
       </div>
       <div style="margin-top:28px;">
-        <a class="btn section-cta" href="<?= SITE_URL ?>/3d-ev-gez"><i class="fa-solid fa-cube"></i> 3D Turu Başlat</a>
+        <a class="btn ghost" href="<?= SITE_URL ?>/3d-ev-gez"><i class="fa-solid fa-cube"></i> 3D Turu Başlat</a>
       </div>
     </div>
     <div class="tv-device">
@@ -321,7 +321,7 @@ $whatsapp = setting('whatsapp', '');
             <h3 id="roomTitle">Salon</h3>
             <p id="roomText">Geniş oturma alanı, doğal ışık ve şehir manzarası.</p>
           </div>
-          <a class="btn" href="<?= SITE_URL ?>/3d-ev-gez"><i class="fa-solid fa-street-view"></i> 360° Tur Başlat</a>
+          <a class="btn ghost" href="<?= SITE_URL ?>/3d-ev-gez"><i class="fa-solid fa-street-view"></i> 360° Tur Başlat</a>
         </div>
       </div>
     </div>

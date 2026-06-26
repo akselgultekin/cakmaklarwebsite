@@ -38,8 +38,8 @@ $footerText = setting('footer_text', '© ' . date('Y') . ' Çakmaklar İnşaat. 
       <h2>Projeler, ilanlar ve araçlar için tek adres: Çakmaklar İnşaat.</h2>
       <p>Satılık, kiralık, 3D tur ve araç portföyünüzü incelemek için bizi arayın.</p>
     </div>
-    <a class="btn" href="<?= SITE_URL ?>/iletisim">
-      <i class="fa-solid fa-calendar-check"></i> İletişime Geç
+    <a class="btn ghost" href="<?= SITE_URL ?>/iletisim">
+      <i class="fa-solid fa-calendar-check"></i> İletişime Geç →
     </a>
   </div>
 </section>
