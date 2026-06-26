@@ -123,7 +123,7 @@ ob_start(); ?>
           <td><img class="td-img" src="<?= e(uploadUrl($s['image'])) ?>" style="width:90px;" onerror="this.src='https://via.placeholder.com/90x50'"></td>
           <td><strong><?= e($s['title'] ?: '—') ?></strong></td>
           <td style="max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;"><?= e(excerpt($s['subtitle'] ?? '', 60)) ?></td>
-          <td><?= $s['btn_text'] ? '<a href="'.e($s['btn_url']).'" target="_blank" class="badge badge-info">'.e($s['btn_text']).'</a>' : '—' ?></td>
+          <td><?= ($s['btn1_text'] ?? '') ? '<a href="'.e($s['btn1_url'] ?? '').'" target="_blank" class="badge badge-info">'.e($s['btn1_text']).'</a>' : '—' ?></td>
           <td><?= e($s['sort_order']) ?></td>
           <td><a href="<?= ADMIN_URL ?>/?module=sliders&action=toggle&id=<?= $s['id'] ?>"><label class="toggle"><input type="checkbox" <?= $s['is_active']?'checked':'' ?> onclick="return false;"><span class="toggle-slider"></span></label></a></td>
           <td>

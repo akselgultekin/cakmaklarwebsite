@@ -105,7 +105,7 @@ if ($action === 'create' || $action === 'edit') {
                   <label>Yakıt Tipi</label>
                   <select class="form-control" name="fuel_type">
                     <?php foreach (['Benzin','Dizel','Hibrit','Elektrik','LPG'] as $ft): ?>
-                    <option <?= ($vehicle['fuel_type']??'')====$ft?'selected':'' ?>><?= $ft ?></option>
+                    <option <?= ($vehicle['fuel'] ?? '') === $ft ? 'selected' : '' ?>><?= $ft ?></option>
                     <?php endforeach; ?>
                   </select>
                 </div>
