@@ -1143,6 +1143,18 @@
       font-size: 14px;
     }
     .credit strong { color: var(--turquoise); }
+    .credit-agency {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      color: rgba(255,255,255,.52);
+      font-size: 13px;
+      text-decoration: none;
+      transition: color .2s;
+    }
+    .credit-agency i { color: var(--turquoise); font-size: 12px; }
+    .credit-agency strong { color: var(--turquoise); font-weight: 600; }
+    .credit-agency:hover { color: rgba(255,255,255,.9); }
 
     .ai-widget {
       position: fixed;

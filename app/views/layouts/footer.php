@@ -95,6 +95,9 @@ $footerText = setting('footer_text', '© ' . date('Y') . ' Çakmaklar İnşaat. 
 
     <div class="credit">
       <span><?= e($footerText) ?></span>
+      <a href="https://simetrisoft.com" target="_blank" rel="noopener" class="credit-agency">
+        <i class="fa-solid fa-code"></i> Web Tasarım &amp; Yazılım: <strong>Simetri Soft</strong>
+      </a>
     </div>
   </div>
 </footer>
