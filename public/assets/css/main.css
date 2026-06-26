@@ -422,15 +422,21 @@
       box-shadow: 0 10px 24px rgba(10,31,68,.24);
     }
     .tab-btn, .room-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
       min-height: 42px;
       padding: 0 18px;
       border-radius: 999px;
       border: 1px solid var(--line);
       background: var(--white);
       color: var(--muted);
-      font-weight:600;
+      font-weight: 600;
+      font-size: 14px;
+      text-decoration: none;
       cursor: pointer;
-      transition: background .2s ease, color .2s ease, border-color .2s ease;
+      white-space: nowrap;
+      transition: background .2s ease, color .2s ease, border-color .2s ease, box-shadow .2s ease;
     }
     .tab-btn.active, .room-btn.active {
       background: var(--navy);
@@ -1197,6 +1203,57 @@
       0%, 100% { opacity: 1; }
       50%       { opacity: .45; }
     }
+    .legal-links {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      padding-top: 18px;
+      border-top: 1px solid rgba(255,255,255,.08);
+      margin-top: 32px;
+      margin-bottom: 16px;
+    }
+    .legal-links a { color: rgba(255,255,255,.45); font-size: 12px; text-decoration: none; transition: color .2s; }
+    .legal-links a:hover { color: var(--turquoise); }
+    .legal-links span { color: rgba(255,255,255,.2); font-size: 12px; }
+
+    /* ── Cookie Banner ── */
+    .cookie-banner {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      z-index: 9999;
+      background: rgba(10,31,68,.97);
+      backdrop-filter: blur(12px);
+      border-top: 1px solid rgba(24,198,195,.25);
+      padding: 16px 24px;
+      display: flex;
+      justify-content: center;
+    }
+    .cookie-inner {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      flex-wrap: wrap;
+      max-width: 1100px;
+      width: 100%;
+    }
+    .cookie-inner p { color: rgba(255,255,255,.75); font-size: 13px; flex: 1; margin: 0; line-height: 1.6; }
+    .cookie-inner a { color: var(--turquoise); }
+    .cookie-btns { display: flex; gap: 10px; flex-shrink: 0; }
+    .cookie-btn {
+      min-height: 36px;
+      padding: 0 20px;
+      border-radius: 999px;
+      border: none;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: opacity .2s;
+    }
+    .cookie-btn.accept { background: var(--turquoise); color: #fff; }
+    .cookie-btn.reject { background: rgba(255,255,255,.12); color: rgba(255,255,255,.7); border: 1px solid rgba(255,255,255,.2); }
+    .cookie-btn:hover { opacity: .85; }
+
     .credit-agency {
       display: inline-flex;
       align-items: center;

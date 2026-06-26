@@ -57,4 +57,37 @@ class PageController extends Controller
             'project'    => $project,
         ]);
     }
+
+    public function privacy(): void
+    {
+        $this->view('pages/legal', [
+            'meta_title'   => 'Gizlilik Politikası | ' . SITE_NAME,
+            'meta_desc'    => 'Çakmaklar İnşaat gizlilik politikası ve kişisel verilerin korunması hakkında bilgi.',
+            'meta_noindex' => true,
+            'legal_title'  => 'Gizlilik Politikası',
+            'legal_key'    => 'privacy',
+        ]);
+    }
+
+    public function kvkk(): void
+    {
+        $this->view('pages/legal', [
+            'meta_title'   => 'KVKK Aydınlatma Metni | ' . SITE_NAME,
+            'meta_desc'    => '6698 sayılı KVKK kapsamında kişisel verilerinizin işlenmesine ilişkin aydınlatma metni.',
+            'meta_noindex' => true,
+            'legal_title'  => 'KVKK Aydınlatma Metni',
+            'legal_key'    => 'kvkk',
+        ]);
+    }
+
+    public function cookie(): void
+    {
+        $this->view('pages/legal', [
+            'meta_title'   => 'Çerez Politikası | ' . SITE_NAME,
+            'meta_desc'    => 'Çakmaklar İnşaat web sitesinde kullanılan çerezler ve veri toplama politikası.',
+            'meta_noindex' => true,
+            'legal_title'  => 'Çerez Politikası',
+            'legal_key'    => 'cookie',
+        ]);
+    }
 }

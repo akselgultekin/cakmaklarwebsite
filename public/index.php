@@ -148,6 +148,11 @@ $router->post('/iletisim', 'ContactController', 'send');
 // AJAX: hızlı başvuru formu
 $router->post('/ajax/basvuru', 'ContactController', 'quickApply');
 
+// Legal Sayfalar
+$router->get('/gizlilik-politikasi', 'PageController', 'privacy');
+$router->get('/kvkk',                'PageController', 'kvkk');
+$router->get('/cerez-politikasi',    'PageController', 'cookie');
+
 // Sitemap & Robots
 $router->get('/sitemap.xml', 'SeoController', 'sitemap');
 $router->get('/robots.txt', 'SeoController', 'robots');

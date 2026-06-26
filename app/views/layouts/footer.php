@@ -39,7 +39,7 @@ $footerText = setting('footer_text', '© ' . date('Y') . ' Çakmaklar İnşaat. 
       <p>Satılık, kiralık, 3D tur ve araç portföyünüzü incelemek için bizi arayın.</p>
     </div>
     <a class="btn ghost" href="<?= SITE_URL ?>/iletisim">
-      <i class="fa-solid fa-calendar-check"></i> İletişime Geç →
+      <i class="fa-solid fa-calendar-check"></i> İletişime Geç
     </a>
   </div>
 </section>
@@ -106,6 +106,14 @@ $footerText = setting('footer_text', '© ' . date('Y') . ' Çakmaklar İnşaat. 
       </div>
     </div>
 
+    <div class="legal-links">
+      <a href="<?= SITE_URL ?>/gizlilik-politikasi">Gizlilik Politikası</a>
+      <span>·</span>
+      <a href="<?= SITE_URL ?>/kvkk">KVKK</a>
+      <span>·</span>
+      <a href="<?= SITE_URL ?>/cerez-politikasi">Çerez Politikası</a>
+    </div>
+
     <div class="credit">
       <span><?= e($footerText) ?></span>
       <a href="https://simetrisoft.com" target="_blank" rel="noopener" class="credit-agency">
@@ -114,3 +122,29 @@ $footerText = setting('footer_text', '© ' . date('Y') . ' Çakmaklar İnşaat. 
     </div>
   </div>
 </footer>
+
+<!-- ── Çerez Onay Banneri ── -->
+<div id="cookieBanner" class="cookie-banner" role="dialog" aria-label="Çerez bildirimi" style="display:none;">
+  <div class="cookie-inner">
+    <p>Bu site, deneyiminizi geliştirmek için çerezler kullanmaktadır. Devam ederek <a href="<?= SITE_URL ?>/cerez-politikasi">Çerez Politikamızı</a> kabul etmiş olursunuz.</p>
+    <div class="cookie-btns">
+      <button id="cookieAccept" class="cookie-btn accept">Kabul Et</button>
+      <button id="cookieReject" class="cookie-btn reject">Reddet</button>
+    </div>
+  </div>
+</div>
+<script>
+(function(){
+  if (localStorage.getItem('cookieConsent')) return;
+  var b = document.getElementById('cookieBanner');
+  if (b) b.style.display = 'flex';
+  document.getElementById('cookieAccept')?.addEventListener('click', function(){
+    localStorage.setItem('cookieConsent','accepted');
+    b.style.display = 'none';
+  });
+  document.getElementById('cookieReject')?.addEventListener('click', function(){
+    localStorage.setItem('cookieConsent','rejected');
+    b.style.display = 'none';
+  });
+})();
+</script>

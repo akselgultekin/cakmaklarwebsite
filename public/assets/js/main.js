@@ -140,10 +140,30 @@
     }
 
     // ── Search tabs (hızlı arama) ─────────────────────────────────────────
+    const quickSearch = $("#quickSearch");
     $$(".search-tabs .tab-btn").forEach(btn => {
       btn.addEventListener("click", () => {
         $$(".search-tabs .tab-btn").forEach(item => item.classList.remove("active"));
         btn.classList.add("active");
+        const tab = btn.dataset.searchTab; // satilik | kiralik | projeler
+        if (!quickSearch) return;
+        if (tab === "projeler") {
+          quickSearch.action = quickSearch.dataset.baseUrl
+            ? quickSearch.dataset.baseUrl.replace("__TAB__", "projeler")
+            : window.location.origin + "/projeler";
+          // Projeler için tip dropdown gizle
+          const tipField = quickSearch.querySelector('[name="tip"]')?.closest(".field");
+          const odaField = quickSearch.querySelector('[name="oda"]')?.closest(".field");
+          if (tipField) tipField.style.display = "none";
+          if (odaField) odaField.style.display = "none";
+        } else {
+          const base = window.location.origin;
+          quickSearch.action = base + "/" + tab;
+          const tipField = quickSearch.querySelector('[name="tip"]')?.closest(".field");
+          const odaField = quickSearch.querySelector('[name="oda"]')?.closest(".field");
+          if (tipField) tipField.style.display = "";
+          if (odaField) odaField.style.display = "";
+        }
       });
     });
 

@@ -63,9 +63,9 @@ $whatsapp = setting('whatsapp', '');
   <div class="container">
     <div class="search-panel">
       <div class="search-tabs">
-        <button class="tab-btn active" data-search-tab="Satılık" onclick="location.href='<?= SITE_URL ?>/satilik'">Satılık</button>
-        <button class="tab-btn" data-search-tab="Kiralık" onclick="location.href='<?= SITE_URL ?>/kiralik'">Kiralık</button>
-        <button class="tab-btn" data-search-tab="Projeler" onclick="location.href='<?= SITE_URL ?>/projeler'">Projeler</button>
+        <button type="button" class="tab-btn active" data-search-tab="satilik">Satılık</button>
+        <button type="button" class="tab-btn" data-search-tab="kiralik">Kiralık</button>
+        <button type="button" class="tab-btn" data-search-tab="projeler">Projeler</button>
       </div>
       <form class="search-grid" id="quickSearch" action="<?= SITE_URL ?>/satilik" method="GET">
         <div class="field">

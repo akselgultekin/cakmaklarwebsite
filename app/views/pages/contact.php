@@ -37,11 +37,25 @@ $mapEmbed = setting('maps_embed', '');
       <span class="eyebrow">İletişim</span>
       <h2>Size Ulaşalım</h2>
       <div class="contact-lines">
-        <?php if ($phone): ?><div class="contact-line"><small>Telefon</small><?= e($phone) ?></div><?php endif; ?>
-        <?php if ($whatsapp): ?><div class="contact-line"><small>WhatsApp</small><?= e($whatsapp) ?></div><?php endif; ?>
-        <?php if ($email): ?><div class="contact-line"><small>E-posta</small><?= e($email) ?></div><?php endif; ?>
-        <?php if ($address): ?><div class="contact-line"><small>Adres</small><?= e($address) ?></div><?php endif; ?>
-        <div class="contact-line"><small>Çalışma</small>Hafta içi 09:00 – 18:30</div>
+        <?php if ($phone): ?>
+        <div class="contact-line">
+          <small>Telefon</small>
+          <a href="tel:<?= e(preg_replace('/[^0-9+]/', '', $phone)) ?>"><?= e($phone) ?></a>
+        </div>
+        <?php endif; ?>
+        <?php if ($email): ?>
+        <div class="contact-line">
+          <small>E-posta</small>
+          <a href="mailto:<?= e($email) ?>"><?= e($email) ?></a>
+        </div>
+        <?php endif; ?>
+        <?php if ($address): ?>
+        <div class="contact-line">
+          <small>Adres</small>
+          <a href="https://www.google.com/maps/place/%C3%87AKMAKLAR+GRUP+%C4%B0N%C5%9EAAT/@40.7274256,31.5999279,17z" target="_blank" rel="noopener"><?= e($address) ?></a>
+        </div>
+        <?php endif; ?>
+        <div class="contact-line"><small>Çalışma Saatlerimiz</small>Hafta içi 09:00 – 18:30</div>
       </div>
 
       <form class="contact-form" method="POST" action="<?= SITE_URL ?>/iletisim">
