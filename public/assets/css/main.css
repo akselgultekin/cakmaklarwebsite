@@ -248,8 +248,8 @@
       pointer-events: none;
     }
     .page-hero .container { position: relative; z-index: 1; }
-    .page-hero h1 { color: #fff; margin: 12px 0 16px; }
-    .page-hero p  { color: rgba(255,255,255,.82); max-width: 580px; font-size: 17px; }
+    .page-hero h1 { color: #fff; margin: 12px 0 16px; font-size: clamp(36px,5vw,58px); font-weight: 800; line-height: 1.1; }
+    .page-hero p  { color: rgba(255,255,255,.82); max-width: 580px; font-size: 17px; font-weight: 400; }
     .slides, .slide {
       min-height: 100svh;
       position: relative;

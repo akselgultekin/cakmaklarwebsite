@@ -15,7 +15,7 @@ $heroSub   = e($page['subtitle'] ?? 'Güven, Kalite, Deneyim');
       <span>›</span>
       <span style="color:#fff;">Biz Kimiz</span>
     </nav>
-    <h1 style="color:#fff;font-size:clamp(32px,5vw,52px);margin-bottom:14px;"><?= $heroTitle ?></h1>
+    <h1><?= $heroTitle ?></h1>
     <p style="color:rgba(255,255,255,.8);max-width:560px;font-size:17px;"><?= $heroSub ?></p>
   </div>
 </section>
