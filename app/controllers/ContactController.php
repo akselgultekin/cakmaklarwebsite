@@ -4,8 +4,8 @@ class ContactController extends Controller
     public function index(): void
     {
         $this->view('contact', [
-            'meta_title' => 'İletişim | ' . SITE_NAME,
-            'meta_desc'  => 'Çakmaklar İnşaat iletişim bilgileri ve form.',
+            'meta_title' => 'İletişim | Bolu Gayrimenkul | ' . SITE_NAME,
+            'meta_desc'  => 'Çakmaklar İnşaat ile iletişime geçin. Bolu\'da konut, proje ve gayrimenkul sorularınız için telefon, WhatsApp veya form aracılığıyla ulaşın.',
         ]);
     }
 
@@ -37,7 +37,7 @@ class ContactController extends Controller
         $this->redirect(SITE_URL . '/iletisim');
     }
 
-    /** POST /ajax/basvuru - Hızlı başvuru formu (ilan/proje detayından) */
+    /** POST /ajax/basvuru */
     public function quickApply(): void
     {
         if (!$this->verifyCsrf()) {

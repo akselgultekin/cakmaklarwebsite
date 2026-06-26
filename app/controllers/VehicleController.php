@@ -16,8 +16,8 @@ class VehicleController extends Controller
         $result = $this->model->paginateActive($page);
 
         $this->view('vehicles/index', [
-            'meta_title' => 'Araç İlanları | ' . SITE_NAME,
-            'meta_desc'  => 'Çakmaklar İnşaat araç portföyü - güvenli ve şeffaf satış süreciyle.',
+            'meta_title' => 'Satılık Araç İlanları Bolu | İkinci El Araç | ' . SITE_NAME,
+            'meta_desc'  => 'Çakmaklar İnşaat araç portföyü — Bolu\'da güvenilir ve şeffaf süreçle satılık ikinci el araçlar. Tüm araçlar belgeli ve bakımlıdır.',
             'vehicles'   => $result['data'],
             'paginator'  => $result,
         ]);
@@ -36,10 +36,32 @@ class VehicleController extends Controller
 
         $images = $this->model->getImages($vehicle['id']);
 
+        $jsonLd = json_encode([
+            '@context'    => 'https://schema.org',
+            '@type'       => 'Car',
+            'name'        => $vehicle['year'] . ' ' . $vehicle['brand'] . ' ' . $vehicle['model'],
+            'url'         => SITE_URL . '/arac-ilanlari/' . $vehicle['slug'],
+            'image'       => $vehicle['cover_image'] ? uploadUrl($vehicle['cover_image']) : '',
+            'vehicleModelDate'         => (string) ($vehicle['year'] ?? ''),
+            'mileageFromOdometer'      => ['@type' => 'QuantitativeValue', 'value' => $vehicle['km'] ?? 0, 'unitCode' => 'KMT'],
+            'fuelType'                 => $vehicle['fuel'] ?? '',
+            'vehicleTransmission'      => $vehicle['transmission'] ?? '',
+            'offers' => [
+                '@type'         => 'Offer',
+                'price'         => $vehicle['price'] ?? '',
+                'priceCurrency' => 'TRY',
+                'seller'        => ['@type' => 'Organization', 'name' => setting('site_name', SITE_NAME)],
+            ],
+        ]);
+
+        $name = $vehicle['year'] . ' ' . $vehicle['brand'] . ' ' . $vehicle['model'];
+
         $this->view('vehicles/detail', [
-            'meta_title' => $vehicle['brand'] . ' ' . $vehicle['model'] . ' | ' . SITE_NAME,
-            'meta_desc'  => $vehicle['year'] . ' ' . $vehicle['brand'] . ' ' . $vehicle['model'] . ' - ' . formatPrice($vehicle['price'] ?? 0),
+            'meta_title' => $name . ' Satılık | Bolu | ' . SITE_NAME,
+            'meta_desc'  => $name . ' — ' . ($vehicle['km'] ? number_format($vehicle['km']) . ' km, ' : '') . ($vehicle['fuel'] ?? '') . '. ' . ($vehicle['price'] ? formatPrice((float)$vehicle['price']) : '') . '. Bolu\'da güvenli satış.',
             'og_image'   => $vehicle['cover_image'],
+            'og_type'    => 'product',
+            'extra_head' => '<script type="application/ld+json">' . $jsonLd . '</script>',
             'vehicle'    => $vehicle,
             'images'     => $images,
         ]);

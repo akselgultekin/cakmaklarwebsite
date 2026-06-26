@@ -16,8 +16,8 @@ class NewsController extends Controller
         $result = $this->model->paginateActive($page);
 
         $this->view('news/index', [
-            'meta_title' => 'Haberler & Duyurular | ' . SITE_NAME,
-            'meta_desc'  => 'Çakmaklar İnşaat güncel haber ve duyuruları.',
+            'meta_title' => 'Haberler & Duyurular | Bolu İnşaat Haberleri | ' . SITE_NAME,
+            'meta_desc'  => 'Çakmaklar İnşaat\'ın güncel proje haberleri, kampanya duyuruları ve Bolu gayrimenkul sektörü gelişmeleri.',
             'news'       => $result['data'],
             'paginator'  => $result,
         ]);
@@ -34,10 +34,31 @@ class NewsController extends Controller
             return;
         }
 
+        $publishedDate = date('c', strtotime($news['published_at'] ?? $news['created_at']));
+
+        $jsonLd = json_encode([
+            '@context'         => 'https://schema.org',
+            '@type'            => 'NewsArticle',
+            'headline'         => $news['title'],
+            'description'      => excerpt($news['summary'] ?? '', 200),
+            'url'              => SITE_URL . '/haberler/' . $news['slug'],
+            'image'            => $news['cover_image'] ? uploadUrl($news['cover_image']) : '',
+            'datePublished'    => $publishedDate,
+            'dateModified'     => $publishedDate,
+            'author'           => ['@type' => 'Organization', 'name' => setting('site_name', SITE_NAME)],
+            'publisher'        => [
+                '@type' => 'Organization',
+                'name'  => setting('site_name', SITE_NAME),
+                'logo'  => ['@type' => 'ImageObject', 'url' => SITE_URL . '/public/assets/img/og-default.jpg'],
+            ],
+        ]);
+
         $this->view('news/detail', [
             'meta_title' => ($news['meta_title'] ?: $news['title'] . ' | ' . SITE_NAME),
             'meta_desc'  => ($news['meta_desc']  ?: excerpt($news['summary'] ?? '', 160)),
             'og_image'   => $news['cover_image'],
+            'og_type'    => 'article',
+            'extra_head' => '<script type="application/ld+json">' . $jsonLd . '</script>',
             'news'       => $news,
         ]);
     }

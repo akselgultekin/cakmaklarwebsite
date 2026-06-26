@@ -8,23 +8,36 @@ class HomeController extends Controller
 {
     public function index(): void
     {
-        $sliderModel  = new SliderModel();
-        $projectModel = new ProjectModel();
-        $listingModel = new ListingModel();
-        $newsModel    = new NewsModel();
+        $sliderModel   = new SliderModel();
+        $projectModel  = new ProjectModel();
+        $listingModel  = new ListingModel();
+        $newsModel     = new NewsModel();
 
-        $sliders          = $sliderModel->activeSliders();
+        $sliders           = $sliderModel->activeSliders();
         $featured_projects = $projectModel->featured(4);
-        $listings         = $listingModel->active('satilik', 3);
-        $recent_news      = $newsModel->recent(3);
+        $listings          = $listingModel->active('satilik', 3);
+        $recent_news       = $newsModel->recent(3);
+
+        $jsonLd = json_encode([
+            '@context' => 'https://schema.org',
+            '@type'    => 'WebSite',
+            'name'     => setting('site_name', SITE_NAME),
+            'url'      => SITE_URL,
+            'potentialAction' => [
+                '@type'       => 'SearchAction',
+                'target'      => SITE_URL . '/satilik?q={search_term_string}',
+                'query-input' => 'required name=search_term_string',
+            ],
+        ]);
 
         $this->view('home', [
-            'meta_title'       => setting('seo_title', SITE_NAME . ' | Bolu Gayrimenkul'),
-            'meta_desc'        => setting('seo_desc'),
-            'sliders'          => $sliders,
-            'featured_projects'=> $featured_projects,
-            'listings'         => $listings,
-            'recent_news'      => $recent_news,
+            'meta_title'        => setting('seo_title', 'Çakmaklar İnşaat | Bolu Konut Projeleri & Gayrimenkul'),
+            'meta_desc'         => setting('seo_desc', 'Bolu\'da güvenilir konut projeleri, satılık ve kiralık daireler. Çakmaklar İnşaat ile hayalinizdeki eve ulaşın.'),
+            'extra_head'        => '<script type="application/ld+json">' . $jsonLd . '</script>',
+            'sliders'           => $sliders,
+            'featured_projects' => $featured_projects,
+            'listings'          => $listings,
+            'recent_news'       => $recent_news,
         ]);
     }
 }

@@ -8,8 +8,9 @@ class PageController extends Controller
         $page = Database::queryOne("SELECT * FROM pages WHERE page_key='about'");
 
         $this->view('pages/about', [
-            'meta_title' => ($page['meta_title'] ?? 'Biz Kimiz | ' . SITE_NAME),
-            'meta_desc'  => ($page['meta_desc']  ?? 'Çakmaklar İnşaat kurumsal bilgiler.'),
+            'meta_title' => ($page['meta_title'] ?? 'Hakkımızda | Bolu İnşaat Firması | ' . SITE_NAME),
+            'meta_desc'  => ($page['meta_desc']  ?? 'Çakmaklar İnşaat — Bolu\'da yılların deneyimiyle güvenilir konut projeleri ve gayrimenkul hizmetleri. Kalite, şeffaflık ve zamanında teslim.'),
+            'og_image'   => $page['cover_image'] ?? '',
             'page'       => $page,
         ]);
     }
@@ -20,22 +21,21 @@ class PageController extends Controller
         $projects = $model->activeAll();
 
         $this->view('pages/floor-plans', [
-            'meta_title' => 'Kat Planları | ' . SITE_NAME,
-            'meta_desc'  => 'Çakmaklar İnşaat projelerinin daire ve kat planları.',
+            'meta_title' => 'Kat Planları | Daire Planları Bolu | ' . SITE_NAME,
+            'meta_desc'  => 'Çakmaklar İnşaat projelerinin 2+1, 3+1 daire ve kat planları. Bolu\'daki konut projelerimizi inceleyin.',
             'projects'   => $projects,
         ]);
     }
 
     public function tour3d(): void
     {
-        $model    = new ProjectModel();
         $projects = Database::query(
             "SELECT * FROM projects WHERE is_active=1 AND (tour_url IS NOT NULL AND tour_url != '' OR tour_embed IS NOT NULL AND tour_embed != '') ORDER BY sort_order, id"
         );
 
         $this->view('pages/tour-3d', [
-            'meta_title' => '3D Ev Gez | ' . SITE_NAME,
-            'meta_desc'  => '360° sanal tur ile Çakmaklar İnşaat projelerini ve dairelerini sanal olarak gezip inceleyin.',
+            'meta_title' => '3D Sanal Ev Gezi | Sanal Tur Bolu | ' . SITE_NAME,
+            'meta_desc'  => 'Çakmaklar İnşaat projelerini 360° sanal tur ile gezip inceleyin. TV, tablet ve mobilde gerçekçi 3D ev gezme deneyimi.',
             'projects'   => $projects,
         ]);
     }
@@ -51,8 +51,9 @@ class PageController extends Controller
         }
 
         $this->view('pages/tour-3d-project', [
-            'meta_title' => '3D Tur: ' . $project['title'] . ' | ' . SITE_NAME,
-            'meta_desc'  => '360° sanal tur ile ' . $project['title'] . ' projesini keşfedin.',
+            'meta_title' => '3D Tur: ' . $project['title'] . ' | Sanal Gezinti | ' . SITE_NAME,
+            'meta_desc'  => $project['title'] . ' projesini 360° sanal tur ile keşfedin. Oda oda gezi, kat planları ve detaylı bilgi.',
+            'og_image'   => $project['cover_image'],
             'project'    => $project,
         ]);
     }
