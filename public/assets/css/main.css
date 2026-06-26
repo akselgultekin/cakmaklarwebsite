@@ -1143,6 +1143,56 @@
       font-size: 14px;
     }
     .credit strong { color: var(--turquoise); }
+    /* ── WhatsApp Float ── */
+    .wa-float {
+      position: fixed;
+      bottom: 28px;
+      left: 24px;
+      z-index: 900;
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: #25D366;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      box-shadow: 0 4px 18px rgba(37,211,102,.45);
+      text-decoration: none;
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+    .wa-float:hover {
+      transform: scale(1.08);
+      box-shadow: 0 6px 24px rgba(37,211,102,.6);
+    }
+    .wa-tooltip {
+      position: absolute;
+      left: 62px;
+      bottom: 50%;
+      transform: translateY(50%);
+      background: rgba(10,31,68,.88);
+      color: #fff;
+      font-size: 12px;
+      font-weight: 500;
+      white-space: nowrap;
+      padding: 6px 12px;
+      border-radius: 8px;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity .2s ease;
+    }
+    .wa-tooltip::before {
+      content: '';
+      position: absolute;
+      right: 100%;
+      top: 50%;
+      transform: translateY(-50%);
+      border: 5px solid transparent;
+      border-right-color: rgba(10,31,68,.88);
+    }
+    .wa-float:hover .wa-tooltip { opacity: 1; }
+
     @keyframes soft-pulse {
       0%, 100% { opacity: 1; }
       50%       { opacity: .45; }

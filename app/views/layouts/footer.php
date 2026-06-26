@@ -10,6 +10,19 @@ $youtube    = setting('youtube', '');
 $footerText = setting('footer_text', '© ' . date('Y') . ' Çakmaklar İnşaat. Tüm hakları saklıdır.');
 ?>
 
+<?php if ($whatsapp): ?>
+<a href="<?= e(whatsappUrl($whatsapp)) ?>" target="_blank" rel="noopener" class="wa-float" aria-label="WhatsApp ile iletişim">
+  <i class="fa-brands fa-whatsapp"></i>
+</a>
+<?php endif; ?>
+
+<?php if ($whatsapp): ?>
+<a href="<?= e(whatsappUrl($whatsapp)) ?>" target="_blank" rel="noopener" class="wa-float" aria-label="WhatsApp ile iletişime geçin">
+  <span class="wa-tooltip">WhatsApp ile iletişime geçin</span>
+  <i class="fa-brands fa-whatsapp"></i>
+</a>
+<?php endif; ?>
+
 <!-- Flash Mesaj -->
 <?php $flash = getFlash(); if ($flash): ?>
 <div id="flashMsg" class="toast toast-<?= e($flash['type']) ?>" style="position:fixed;bottom:24px;right:24px;z-index:999;background:<?= $flash['type']==='success' ? '#138C65' : '#C0392B' ?>;color:#fff;padding:14px 22px;border-radius:12px;font-weight:600;box-shadow:0 14px 32px rgba(0,0,0,.2);max-width:360px;">
