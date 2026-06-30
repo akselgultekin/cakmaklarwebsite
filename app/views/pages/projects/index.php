@@ -27,7 +27,7 @@ $statusLabels = ['satiasta' => 'Satışta', 'yakinda' => 'Yakında', 'teslim_edi
       <?php foreach ($projects as $p): ?>
       <article class="project-card feature">
         <div class="card-image">
-          <img src="<?= $p['cover_image'] ? e(uploadUrl($p['cover_image'])) : 'https://images.unsplash.com/photo-1605146769289-440113cc3d00?auto=format&fit=crop&w=1000&q=80' ?>" alt="<?= e($p['title']) ?>">
+          <img loading="lazy" src="<?= $p['cover_image'] ? e(uploadUrl($p['cover_image'])) : 'https://images.unsplash.com/photo-1605146769289-440113cc3d00?auto=format&fit=crop&w=1000&q=80' ?>" alt="<?= e($p['title']) ?>">
           <span class="status"><?= e($statusLabels[$p['status']] ?? $p['status']) ?></span>
           <div class="project-overlay">
             <h3><?= e($p['title']) ?></h3>

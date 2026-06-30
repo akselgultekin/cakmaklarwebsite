@@ -74,6 +74,9 @@ $flash = getFlash();
 
       <div class="nav-section">
         <div class="nav-section-title">Sistem</div>
+        <a class="nav-link <?= $activeModule==='stats' ? 'active' : '' ?>" href="<?= ADMIN_URL ?>/?module=stats">
+          <i class="fa-solid fa-chart-bar"></i> İstatistikler
+        </a>
         <a class="nav-link <?= $activeModule==='forms' ? 'active' : '' ?>" href="<?= ADMIN_URL ?>/?module=forms">
           <i class="fa-solid fa-inbox"></i> Form Başvuruları
           <?php

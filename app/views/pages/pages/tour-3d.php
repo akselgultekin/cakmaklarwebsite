@@ -87,9 +87,9 @@
       <article class="project-card">
         <div class="project-image">
           <?php if ($p['cover_image']): ?>
-          <img src="<?= e(uploadUrl($p['cover_image'])) ?>" alt="<?= e($p['title']) ?>">
+          <img loading="lazy" src="<?= e(uploadUrl($p['cover_image'])) ?>" alt="<?= e($p['title']) ?>">
           <?php else: ?>
-          <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=900&q=80" alt="<?= e($p['title']) ?>">
+          <img loading="lazy" src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=900&q=80" alt="<?= e($p['title']) ?>">
           <?php endif; ?>
           <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:0;transition:.3s;" class="project-play-icon">
             <div style="width:64px;height:64px;border-radius:50%;background:rgba(24,198,195,.9);display:flex;align-items:center;justify-content:center;font-size:28px;color:#fff;">

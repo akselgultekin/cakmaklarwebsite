@@ -47,7 +47,7 @@ $heroSub   = e($page['subtitle'] ?? 'Güven, Kalite, Deneyim');
       </div>
       <?php if (!empty($page['cover_image'])): ?>
       <div>
-        <img src="<?= e(uploadUrl($page['cover_image'])) ?>"
+        <img loading="lazy" src="<?= e(uploadUrl($page['cover_image'])) ?>"
              alt="<?= $heroTitle ?>"
              style="width:100%;border-radius:16px;box-shadow:0 20px 60px rgba(10,31,68,.15);">
       </div>

@@ -49,12 +49,12 @@ $heroBg = !empty($allImages[0]['image'])
   <div class="container">
     <div style="display:grid;grid-template-columns:1.35fr .65fr;gap:14px;">
       <div style="height:480px;border-radius:var(--radius);overflow:hidden;">
-        <img src="<?= e(uploadUrl($allImages[0]['image'])) ?>" alt="<?= e($listing['title']) ?>" style="width:100%;height:100%;object-fit:cover;">
+        <img loading="lazy" src="<?= e(uploadUrl($allImages[0]['image'])) ?>" alt="<?= e($listing['title']) ?>" style="width:100%;height:100%;object-fit:cover;">
       </div>
       <div style="display:grid;gap:14px;">
         <?php foreach (array_slice($allImages, 1, 2) as $img): ?>
         <div style="height:233px;border-radius:var(--radius);overflow:hidden;">
-          <img src="<?= e(uploadUrl($img['image'])) ?>" alt="<?= e($listing['title']) ?>" style="width:100%;height:100%;object-fit:cover;">
+          <img loading="lazy" src="<?= e(uploadUrl($img['image'])) ?>" alt="<?= e($listing['title']) ?>" style="width:100%;height:100%;object-fit:cover;">
         </div>
         <?php endforeach; ?>
       </div>
@@ -132,6 +132,11 @@ $heroBg = !empty($allImages[0]['image'])
 
   <!-- SİDEBAR -->
   <aside style="position:sticky;top:100px;display:grid;gap:14px;align-self:start;">
+
+    <a href="<?= SITE_URL ?>/brosur/<?= e($listing['slug']) ?>" target="_blank" class="brosur-btn">
+      <i class="fa-solid fa-file-pdf"></i> Broşür İndir (PDF)
+    </a>
+
     <div style="border:1px solid var(--line);border-radius:var(--radius);background:#fff;padding:24px;box-shadow:0 16px 50px rgba(10,31,68,.06);">
       <span class="eyebrow">İletişim</span>
       <h3 style="margin:10px 0 6px;">Satış Danışmanı</h3>
@@ -174,7 +179,7 @@ $heroBg = !empty($allImages[0]['image'])
       <?php foreach ($similar as $s): ?>
       <article class="listing-card">
         <div class="card-image">
-          <img src="<?= $s['cover_image'] ? e(uploadUrl($s['cover_image'])) : 'https://images.unsplash.com/photo-1600607688969-a5bfcd646154?auto=format&fit=crop&w=800&q=82' ?>" alt="<?= e($s['title']) ?>">
+          <img loading="lazy" src="<?= $s['cover_image'] ? e(uploadUrl($s['cover_image'])) : 'https://images.unsplash.com/photo-1600607688969-a5bfcd646154?auto=format&fit=crop&w=800&q=82' ?>" alt="<?= e($s['title']) ?>">
         </div>
         <div class="listing-body">
           <h3><?= e($s['title']) ?></h3>

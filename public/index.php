@@ -156,6 +156,12 @@ $router->get('/gizlilik-politikasi', 'PageController', 'privacy');
 $router->get('/kvkk',                'PageController', 'kvkk');
 $router->get('/cerez-politikasi',    'PageController', 'cookie');
 
+// PDF Broşür
+$router->get('/brosur/{slug}', 'ListingController', 'brosur');
+
+// Harita
+$router->get('/harita', 'MapController', 'index');
+
 // Sitemap & Robots
 $router->get('/sitemap.xml', 'SeoController', 'sitemap');
 $router->get('/robots.txt', 'SeoController', 'robots');

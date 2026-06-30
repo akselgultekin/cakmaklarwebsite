@@ -14,7 +14,7 @@
       <?php foreach ($news as $n): ?>
       <article class="news-item">
         <div class="news-image">
-          <img src="<?= $n['cover_image'] ? e(uploadUrl($n['cover_image'])) : 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=900&q=80' ?>" alt="<?= e($n['title']) ?>">
+          <img loading="lazy" src="<?= $n['cover_image'] ? e(uploadUrl($n['cover_image'])) : 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=900&q=80' ?>" alt="<?= e($n['title']) ?>">
         </div>
         <div class="news-copy">
           <div class="news-date"><?= formatDate($n['published_at'] ?? $n['created_at']) ?></div>

@@ -189,9 +189,9 @@ $whatsapp = setting('whatsapp', '');
       <article class="project-card feature">
         <div class="card-image">
           <?php if ($proj['cover_image']): ?>
-          <img src="<?= e(uploadUrl($proj['cover_image'])) ?>" alt="<?= e($proj['title']) ?>">
+          <img loading="lazy" src="<?= e(uploadUrl($proj['cover_image'])) ?>" alt="<?= e($proj['title']) ?>">
           <?php else: ?>
-          <img src="https://images.unsplash.com/photo-1605146769289-440113cc3d00?auto=format&fit=crop&w=1000&q=80" alt="<?= e($proj['title']) ?>">
+          <img loading="lazy" src="https://images.unsplash.com/photo-1605146769289-440113cc3d00?auto=format&fit=crop&w=1000&q=80" alt="<?= e($proj['title']) ?>">
           <?php endif; ?>
           <span class="status"><?= e($statusLabels[$proj['status']] ?? $proj['status']) ?></span>
           <div class="project-overlay">
@@ -243,9 +243,9 @@ $whatsapp = setting('whatsapp', '');
       <article class="listing-card">
         <div class="card-image">
           <?php if ($l['cover_image']): ?>
-          <img src="<?= e(uploadUrl($l['cover_image'])) ?>" alt="<?= e($l['title']) ?>">
+          <img loading="lazy" src="<?= e(uploadUrl($l['cover_image'])) ?>" alt="<?= e($l['title']) ?>">
           <?php else: ?>
-          <img src="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=900&q=80" alt="<?= e($l['title']) ?>">
+          <img loading="lazy" src="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=900&q=80" alt="<?= e($l['title']) ?>">
           <?php endif; ?>
         </div>
         <div class="listing-body">
@@ -363,9 +363,9 @@ $whatsapp = setting('whatsapp', '');
       <article class="news-item">
         <div class="news-image">
           <?php if ($n['cover_image']): ?>
-          <img src="<?= e(uploadUrl($n['cover_image'])) ?>" alt="<?= e($n['title']) ?>">
+          <img loading="lazy" src="<?= e(uploadUrl($n['cover_image'])) ?>" alt="<?= e($n['title']) ?>">
           <?php else: ?>
-          <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=900&q=80" alt="<?= e($n['title']) ?>">
+          <img loading="lazy" src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=900&q=80" alt="<?= e($n['title']) ?>">
           <?php endif; ?>
         </div>
         <div class="news-copy">

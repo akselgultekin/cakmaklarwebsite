@@ -50,6 +50,8 @@ class ListingController extends Controller
             'oda'       => $this->get('oda', ''),
             'min_fiyat' => $this->get('min_fiyat', ''),
             'max_fiyat' => $this->get('max_fiyat', ''),
+            'min_m2'    => $this->get('min_m2', ''),
+            'max_m2'    => $this->get('max_m2', ''),
         ], $extra);
 
         $result = $this->model->filter($filters, $page);
@@ -65,6 +67,49 @@ class ListingController extends Controller
         ]);
     }
 
+    /** GET /brosur/{slug} — print-ready broşür sayfası */
+    public function brosur(): void
+    {
+        $slug    = $this->get('slug', '');
+        $listing = $this->model->findBySlug($slug);
+        if (!$listing) { http_response_code(404); echo 'İlan bulunamadı.'; return; }
+
+        $images  = $this->model->getImages($listing['id']);
+        $phone   = setting('phone', '');
+        $siteName = defined('SITE_NAME') ? SITE_NAME : 'Çakmaklar İnşaat';
+        $siteUrl  = defined('SITE_URL')  ? SITE_URL  : '';
+        $logo     = setting('logo', '');
+        $logoHtml = $logo
+            ? '<img src="' . e(uploadUrl($logo)) . '" alt="' . e($siteName) . '" style="height:48px;object-fit:contain;">'
+            : '<strong style="font-size:22px;color:#0A1F44;">' . e($siteName) . '</strong>';
+
+        $allImages = array_filter(array_merge(
+            $listing['cover_image'] ? [['image' => $listing['cover_image']]] : [],
+            $images
+        ), fn($i) => !empty($i['image']));
+        $allImages = array_values($allImages);
+
+        $typeLabel = $listing['type'] === 'satilik' ? 'Satılık' : ($listing['type'] === 'kiralik' ? 'Kiralık' : 'Ticari');
+        $priceStr  = $listing['price'] ? formatPrice((float)$listing['price'], $listing['price_unit'] ?? '') : 'Fiyat sorunuz';
+
+        $specs = array_filter([
+            'm²'        => $listing['area_m2'],
+            'Oda'       => $listing['room_count'],
+            'Kat'       => $listing['floor'],
+            'Banyo'     => $listing['bathroom'],
+            'Isıtma'    => $listing['heating'],
+            'Bina Yaşı' => $listing['building_age'],
+            'Konum'     => $listing['location'],
+        ]);
+
+        // Render standalone HTML (no layout)
+        ob_start();
+        require APP_PATH . '/views/pages/listings/brosur.php';
+        $html = ob_get_clean();
+        echo $html;
+        exit;
+    }
+
     /** GET /ilan/{slug} veya /satilik/{slug} veya /kiralik/{slug} */
     public function detail(): void
     {
@@ -75,6 +120,17 @@ class ListingController extends Controller
             http_response_code(404);
             $this->view('404', ['meta_title' => 'İlan Bulunamadı | ' . SITE_NAME]);
             return;
+        }
+
+        // Ziyaret kaydı (botları atla)
+        $ua = $_SERVER['HTTP_USER_AGENT'] ?? '';
+        if (!preg_match('/bot|crawl|spider|slurp|facebook|twitter/i', $ua)) {
+            try {
+                Database::execute(
+                    "INSERT INTO page_views (page_type, page_id, page_slug, ip, user_agent) VALUES (?,?,?,?,?)",
+                    ['listing', $listing['id'], $listing['slug'], $_SERVER['REMOTE_ADDR'] ?? '', substr($ua, 0, 300)]
+                );
+            } catch (\Throwable $e) {}
         }
 
         $images  = $this->model->getImages($listing['id']);

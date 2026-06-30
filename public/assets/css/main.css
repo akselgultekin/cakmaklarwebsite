@@ -1983,3 +1983,91 @@
 @media (max-width: 700px) {
   .project-specs { grid-template-columns: repeat(2, 1fr); }
 }
+
+/* ============================================================
+   LISTINGS PAGE — sidebar filter layout
+   ============================================================ */
+.listing-page-layout {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 40px;
+  padding: 60px 0 80px;
+  align-items: start;
+}
+.listing-filter-sidebar {
+  position: sticky;
+  top: 90px;
+}
+.listing-filter-sidebar select,
+.listing-filter-sidebar input[type="text"],
+.listing-filter-sidebar input[inputmode="numeric"] {
+  width: 100%;
+  border: 1.5px solid var(--line);
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-family: inherit;
+  font-size: 14px;
+  color: var(--navy);
+  background: #fff;
+  outline: none;
+  transition: border-color .2s;
+}
+.listing-filter-sidebar select:focus,
+.listing-filter-sidebar input:focus { border-color: var(--turquoise); }
+.filter-block {
+  margin-bottom: 24px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--line);
+}
+.filter-block h4 {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: var(--muted);
+  margin: 0 0 12px;
+}
+.filter-chips { display: flex; flex-wrap: wrap; gap: 7px; }
+.fchip {
+  padding: 6px 13px;
+  border-radius: 999px;
+  border: 1.5px solid var(--line);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--muted);
+  text-decoration: none;
+  transition: border-color .18s, color .18s, background .18s;
+  white-space: nowrap;
+}
+.fchip:hover { border-color: var(--navy); color: var(--navy); }
+.fchip.active { background: var(--navy); color: #fff; border-color: var(--navy); }
+.filter-submit-btn { width: 100%; justify-content: center; margin-bottom: 12px; }
+.filter-reset-link {
+  display: block;
+  text-align: center;
+  font-size: 13px;
+  color: var(--muted);
+  text-decoration: none;
+  font-weight: 600;
+  padding: 4px 0;
+}
+.filter-reset-link:hover { color: var(--navy); }
+/* noUiSlider brand overrides */
+.noUi-connect { background: var(--turquoise); }
+.noUi-handle { border-radius: 50%; border: 2px solid var(--turquoise); box-shadow: none; width: 18px !important; height: 18px !important; right: -9px !important; top: -7px !important; }
+.noUi-handle::before, .noUi-handle::after { display: none; }
+.noUi-target { background: var(--line); border: none; box-shadow: none; height: 4px; border-radius: 4px; }
+.listing-results {}
+@media (max-width: 860px) {
+  .listing-page-layout { grid-template-columns: 1fr; }
+  .listing-filter-sidebar { position: static; }
+}
+
+/* Broşür butonu */
+.brosur-btn {
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  padding: 14px 20px; border: 1.5px dashed var(--line); border-radius: var(--radius);
+  color: var(--muted); font-weight: 600; font-size: 14px; text-decoration: none;
+  background: #fff; transition: border-color .2s, color .2s;
+}
+.brosur-btn:hover { border-color: var(--navy); color: var(--navy); }

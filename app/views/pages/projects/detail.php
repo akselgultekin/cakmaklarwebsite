@@ -70,12 +70,12 @@ $statusLabel  = $statusLabels[$project['status']] ?? $project['status'];
     <h2 style="margin-top:10px;">Dış Mekan ve İç Mekan Görselleri</h2>
     <div style="display:grid;grid-template-columns:1.3fr .7fr;gap:18px;margin-top:32px;">
       <div style="height:520px;border-radius:var(--radius);overflow:hidden;">
-        <img src="<?= e(uploadUrl($images[0]['image'])) ?>" alt="<?= e($images[0]['alt'] ?? $project['title']) ?>" style="width:100%;height:100%;object-fit:cover;">
+        <img loading="lazy" src="<?= e(uploadUrl($images[0]['image'])) ?>" alt="<?= e($images[0]['alt'] ?? $project['title']) ?>" style="width:100%;height:100%;object-fit:cover;">
       </div>
       <div style="display:grid;gap:18px;">
         <?php foreach (array_slice($images, 1, 2) as $img): ?>
         <div style="height:<?= count($images) > 1 ? '251' : '520' ?>px;border-radius:var(--radius);overflow:hidden;">
-          <img src="<?= e(uploadUrl($img['image'])) ?>" alt="<?= e($img['alt'] ?? $project['title']) ?>" style="width:100%;height:100%;object-fit:cover;">
+          <img loading="lazy" src="<?= e(uploadUrl($img['image'])) ?>" alt="<?= e($img['alt'] ?? $project['title']) ?>" style="width:100%;height:100%;object-fit:cover;">
         </div>
         <?php endforeach; ?>
       </div>
@@ -84,7 +84,7 @@ $statusLabel  = $statusLabels[$project['status']] ?? $project['status'];
     <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:18px;">
       <?php foreach (array_slice($images, 3) as $img): ?>
       <div style="height:220px;border-radius:var(--radius);overflow:hidden;">
-        <img src="<?= e(uploadUrl($img['image'])) ?>" alt="<?= e($img['alt'] ?? '') ?>" style="width:100%;height:100%;object-fit:cover;">
+        <img loading="lazy" src="<?= e(uploadUrl($img['image'])) ?>" alt="<?= e($img['alt'] ?? '') ?>" style="width:100%;height:100%;object-fit:cover;">
       </div>
       <?php endforeach; ?>
     </div>
@@ -104,7 +104,7 @@ $statusLabel  = $statusLabels[$project['status']] ?? $project['status'];
       <div style="border:1px solid var(--line);border-radius:var(--radius);padding:26px;background:#fff;">
         <?php if ($plan['image']): ?>
         <div style="height:180px;border-radius:6px;overflow:hidden;margin-bottom:16px;">
-          <img src="<?= e(uploadUrl($plan['image'])) ?>" alt="<?= e($plan['title']) ?>" style="width:100%;height:100%;object-fit:cover;">
+          <img loading="lazy" src="<?= e(uploadUrl($plan['image'])) ?>" alt="<?= e($plan['title']) ?>" style="width:100%;height:100%;object-fit:cover;">
         </div>
         <?php endif; ?>
         <h3 style="font-family:Syne,sans-serif;font-size:28px;color:var(--navy);"><?= e($plan['title']) ?></h3>
@@ -162,7 +162,7 @@ $statusLabel  = $statusLabels[$project['status']] ?? $project['status'];
       ?>
       <article class="listing-card">
         <div class="card-image">
-          <img src="<?= $l['cover_image'] ? e(uploadUrl($l['cover_image'])) : 'https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=900&q=80' ?>" alt="<?= e($l['title']) ?>">
+          <img loading="lazy" src="<?= $l['cover_image'] ? e(uploadUrl($l['cover_image'])) : 'https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=900&q=80' ?>" alt="<?= e($l['title']) ?>">
         </div>
         <div class="listing-body">
           <h3><?= e($l['title']) ?></h3>

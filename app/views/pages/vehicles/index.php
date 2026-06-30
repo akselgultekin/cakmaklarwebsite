@@ -23,7 +23,7 @@
       ?>
       <article style="overflow:hidden;border:1px solid var(--line);border-radius:var(--radius);background:#fff;box-shadow:0 16px 42px rgba(10,31,68,.06);">
         <div style="height:260px;overflow:hidden;">
-          <img src="<?= $v['cover_image'] ? e(uploadUrl($v['cover_image'])) : 'https://images.unsplash.com/photo-1619767886558-efdc259cde1a?auto=format&fit=crop&w=1000&q=80' ?>" alt="<?= e($v['brand'] . ' ' . $v['model']) ?>" style="width:100%;height:100%;object-fit:cover;transition:transform .78s ease;">
+          <img loading="lazy" src="<?= $v['cover_image'] ? e(uploadUrl($v['cover_image'])) : 'https://images.unsplash.com/photo-1619767886558-efdc259cde1a?auto=format&fit=crop&w=1000&q=80' ?>" alt="<?= e($v['brand'] . ' ' . $v['model']) ?>" style="width:100%;height:100%;object-fit:cover;transition:transform .78s ease;">
         </div>
         <div style="padding:22px;">
           <h3 style="font-size:22px;font-family:Syne,sans-serif;"><?= e($v['year'] . ' ' . $v['brand'] . ' ' . $v['model']) ?></h3>

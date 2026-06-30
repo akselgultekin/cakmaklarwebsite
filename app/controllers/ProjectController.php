@@ -39,6 +39,11 @@ class ProjectController extends Controller
             return;
         }
 
+        $ua = $_SERVER['HTTP_USER_AGENT'] ?? '';
+        if (!preg_match('/bot|crawl|spider|slurp|facebook|twitter/i', $ua)) {
+            try { Database::execute("INSERT INTO page_views (page_type,page_id,page_slug,ip,user_agent) VALUES (?,?,?,?,?)", ['project', $project['id'], $project['slug'], $_SERVER['REMOTE_ADDR'] ?? '', substr($ua,0,300)]); } catch (\Throwable $e) {}
+        }
+
         $images     = $this->model->getImages($project['id']);
         $floorPlans = $this->model->getFloorPlans($project['id']);
         $listings   = $this->model->getListings($project['id']);

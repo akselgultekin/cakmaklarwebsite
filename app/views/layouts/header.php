@@ -76,6 +76,7 @@ $currentUri = strtok($_SERVER['REQUEST_URI'] ?? '/', '?');
       <a href="<?= SITE_URL ?>/kiralik" class="<?= isActivePage('/kiralik') ?>">Kiralık</a>
       <a href="<?= SITE_URL ?>/arac-ilanlari" class="<?= isActivePage('/arac-ilanlari') ?>">Araç İlanları</a>
       <a href="<?= SITE_URL ?>/3d-ev-gez" class="<?= isActivePage('/3d-ev-gez') ?>">3D Ev Gez</a>
+      <a href="<?= SITE_URL ?>/harita" class="<?= isActivePage('/harita') ?>"><i class="fa-solid fa-map-location-dot" style="font-size:12px;"></i> Harita</a>
       <a href="<?= SITE_URL ?>/iletisim" class="<?= isActivePage('/iletisim') ?>">İletişim</a>
     </div>
 

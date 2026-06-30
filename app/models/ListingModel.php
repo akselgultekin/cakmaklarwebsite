@@ -70,6 +70,14 @@ class ListingModel extends Model
             $where[]  = 'price<=?';
             $params[] = (float) str_replace('.', '', $filters['max_fiyat']);
         }
+        if (!empty($filters['min_m2'])) {
+            $where[]  = 'area_m2>=?';
+            $params[] = (int) $filters['min_m2'];
+        }
+        if (!empty($filters['max_m2'])) {
+            $where[]  = 'area_m2<=?';
+            $params[] = (int) $filters['max_m2'];
+        }
 
         $whereStr = implode(' AND ', $where);
         return $this->paginate($page, $perPage, $whereStr, $params, 'sort_order, id DESC');

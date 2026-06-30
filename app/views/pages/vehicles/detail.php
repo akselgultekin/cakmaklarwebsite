@@ -30,7 +30,7 @@ $allImages = array_values($allImages);
       <div style="display:grid;gap:14px;">
         <?php foreach (array_slice($allImages, 1, 2) as $img): ?>
         <div style="height:203px;border-radius:var(--radius);overflow:hidden;">
-          <img src="<?= e(uploadUrl($img['image'])) ?>" alt="" style="width:100%;height:100%;object-fit:cover;">
+          <img loading="lazy" src="<?= e(uploadUrl($img['image'])) ?>" alt="" style="width:100%;height:100%;object-fit:cover;">
         </div>
         <?php endforeach; ?>
       </div>

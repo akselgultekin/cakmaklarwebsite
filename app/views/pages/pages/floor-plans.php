@@ -50,7 +50,7 @@
         <div style="background:var(--bg-soft,#F4F6F9);border-radius:12px;overflow:hidden;border:1px solid #E5EAF0;">
           <?php if (!empty($plan['image'])): ?>
           <a href="<?= e(uploadUrl($plan['image'])) ?>" target="_blank">
-            <img src="<?= e(uploadUrl($plan['image'])) ?>" alt="<?= e($plan['title']) ?>"
+            <img loading="lazy" src="<?= e(uploadUrl($plan['image'])) ?>" alt="<?= e($plan['title']) ?>"
                  style="width:100%;height:200px;object-fit:cover;display:block;">
           </a>
           <?php else: ?>

@@ -61,6 +61,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'tour_url'    => trim($_POST['tour_url'] ?? ''),
         'tour_embed'  => $_POST['tour_embed'] ?? '',
         'map_embed'   => $_POST['map_embed'] ?? '',
+        'lat'         => !empty($_POST['lat']) ? (float)$_POST['lat'] : null,
+        'lng'         => !empty($_POST['lng']) ? (float)$_POST['lng'] : null,
         'is_featured' => isset($_POST['is_featured']) ? 1 : 0,
         'is_active'   => isset($_POST['is_active']) ? 1 : 0,
         'meta_title'  => trim($_POST['meta_title'] ?? ''),
@@ -170,6 +172,36 @@ if ($action === 'create' || $action === 'edit') {
               <div class="form-group"><label>Tur URL</label><input class="form-control" name="tour_url" value="<?= e($listing['tour_url'] ?? '') ?>"></div>
               <div class="form-group"><label>Tur Embed</label><textarea class="form-control" name="tour_embed" rows="3"><?= e($listing['tour_embed'] ?? '') ?></textarea></div>
               <div class="form-group"><label>Harita Embed (Google Maps)</label><textarea class="form-control" name="map_embed" rows="3"><?= e($listing['map_embed'] ?? '') ?></textarea></div>
+              <div class="form-group">
+                <label>Koordinat — Leaflet Haritada Pin (tıklayarak seç)</label>
+                <div id="adminMapPicker" style="height:280px;border-radius:8px;border:1px solid #dee2e6;margin-bottom:8px;"></div>
+                <div style="display:flex;gap:8px;">
+                  <input class="form-control" name="lat" id="latInput" placeholder="Enlem (ör: 40.7370)" value="<?= e($listing['lat'] ?? '') ?>" step="any">
+                  <input class="form-control" name="lng" id="lngInput" placeholder="Boylam (ör: 31.6070)" value="<?= e($listing['lng'] ?? '') ?>" step="any">
+                </div>
+                <small class="text-muted">Haritaya tıklayarak veya yukarıdaki alanlara manuel girerek koordinat belirleyin.</small>
+              </div>
+              <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+              <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+              <script>
+              document.addEventListener('DOMContentLoaded', function() {
+                var lat = parseFloat(document.getElementById('latInput').value) || 40.7370;
+                var lng = parseFloat(document.getElementById('lngInput').value) || 31.6070;
+                var map = L.map('adminMapPicker').setView([lat, lng], 13);
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '© OpenStreetMap' }).addTo(map);
+                var marker = L.marker([lat, lng], {draggable: true}).addTo(map);
+                function updateInputs(latlng) {
+                  document.getElementById('latInput').value = latlng.lat.toFixed(7);
+                  document.getElementById('lngInput').value = latlng.lng.toFixed(7);
+                }
+                marker.on('dragend', function(e) { updateInputs(e.target.getLatLng()); });
+                map.on('click', function(e) { marker.setLatLng(e.latlng); updateInputs(e.latlng); });
+                document.getElementById('latInput').addEventListener('change', function() {
+                  var la = parseFloat(this.value), ln = parseFloat(document.getElementById('lngInput').value);
+                  if (!isNaN(la) && !isNaN(ln)) { marker.setLatLng([la,ln]); map.setView([la,ln]); }
+                });
+              });
+              </script>
             </div>
           </div>
 

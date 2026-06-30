@@ -163,6 +163,28 @@ function uploadImage(array $file, string $folder): string|false
         throw new RuntimeException('Dosya yüklenemedi.');
     }
 
+    // WebP dönüşümü — GD varsa ve kaynak zaten WebP değilse
+    if (function_exists('imagewebp') && $mime !== 'image/webp' && in_array($mime, ['image/jpeg','image/png'])) {
+        try {
+            $src = match($mime) {
+                'image/jpeg' => imagecreatefromjpeg($targetPath),
+                'image/png'  => imagecreatefrompng($targetPath),
+                default      => null,
+            };
+            if ($src) {
+                $webpPath = preg_replace('/\.[^.]+$/', '.webp', $targetPath);
+                imagewebp($src, $webpPath, 82);
+                imagedestroy($src);
+                // Orijinali sil, WebP döndür
+                @unlink($targetPath);
+                $webpFilename = preg_replace('/\.[^.]+$/', '.webp', $filename);
+                return $folder . '/' . $webpFilename;
+            }
+        } catch (\Throwable $e) {
+            // Dönüşüm başarısız olursa orijinali döndür
+        }
+    }
+
     return $folder . '/' . $filename;
 }
 
