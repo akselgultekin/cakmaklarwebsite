@@ -12,6 +12,7 @@
   ?>
   <title><?= $seoTitle ?></title>
   <meta name="description" content="<?= $seoDesc ?>">
+  <meta name="author" content="Simetri Soft">
   <meta name="robots" content="<?= !empty($meta_noindex) ? 'noindex,nofollow' : 'index,follow' ?>">
   <link rel="canonical" href="<?= $seoUrl ?>">
 

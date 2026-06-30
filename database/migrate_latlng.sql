@@ -1,13 +1,4 @@
--- Harita koordinatları — cPanel phpMyAdmin'de çalıştırın
-ALTER TABLE `listings`
-  ADD COLUMN `lat` DECIMAL(10,7) NULL AFTER `location`,
-  ADD COLUMN `lng` DECIMAL(10,7) NULL AFTER `lat`;
-
-ALTER TABLE `projects`
-  ADD COLUMN `lat` DECIMAL(10,7) NULL AFTER `location`,
-  ADD COLUMN `lng` DECIMAL(10,7) NULL AFTER `lat`;
-
--- Sayfa ziyaretleri tablosu
+-- Sayfa ziyaretleri tablosu — cPanel phpMyAdmin'de çalıştırın
 CREATE TABLE IF NOT EXISTS `page_views` (
   `id`         INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
   `page_type`  VARCHAR(30) NOT NULL,
