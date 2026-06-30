@@ -214,3 +214,177 @@
       link.addEventListener("mouseenter", setMegaVisual);
       link.addEventListener("focus", setMegaVisual);
     });
+
+    // ── AI Chat Widget (frontend-only) ───────────────────────────────────
+    (function () {
+      const trigger   = document.getElementById('aiTriggerBtn');
+      const panel     = document.getElementById('aiPanel');
+      const closeBtn  = document.getElementById('aiPanelClose');
+      const input     = document.getElementById('aiInput');
+      const sendBtn   = document.getElementById('aiSendBtn');
+      const msgBox    = document.getElementById('aiMessages');
+      const chipsWrap = document.getElementById('aiChips');
+      const notify    = document.getElementById('aiNotify');
+      const notifyClose = document.getElementById('aiNotifyClose');
+      if (!trigger || !panel) return;
+
+      // ── Bilgi tabanı ──────────────────────────────────────────────────
+      const KB = [
+        {
+          match: ['satılık ev', 'satılık konut', 'satılık daire', 'satılık villa', 'satın almak', 'ev almak', 'konut almak', 'satılık'],
+          reply: 'Satılık konut portföyümüzde daire, villa ve arsa seçenekleri mevcut. Güncel ilanlarımızı inceleyebilirsiniz.',
+          links: [{ text: '🏠 Satılık İlanları Gör', url: '/satilik' }, { text: '📞 Fiyat Bilgisi Al', url: 'tel:+905336227493' }]
+        },
+        {
+          match: ['kiralık ev', 'kiralık daire', 'kiralık dükkan', 'kiralık ofis', 'kiralık konut', 'kiralamak', 'kira', 'kiracı', 'kiralık'],
+          reply: 'Kiralık konut ve işyeri seçeneklerimiz için portföyümüzü incelemenizi öneririz.',
+          links: [{ text: '🏡 Kiralık İlanları Gör', url: '/kiralik' }, { text: '🏢 Ticari İlanlar', url: '/ticari' }]
+        },
+        {
+          match: ['3d tur', 'sanal tur', '3d ev', '360', 'sanal gezi', 'ev gez', 'virtual', '3d'],
+          reply: 'Projelerimizi evinizden 360° sanal tur ile keşfedebilirsiniz! Gerçekçi deneyim için tıklayın.',
+          links: [{ text: '🎯 3D Sanal Turu Başlat', url: '/3d-ev-gez' }]
+        },
+        {
+          match: ['araç', 'araba', 'vasıta', 'otomobil', 'araç ilanı', 'araç al', 'sıfır araç', 'ikinci el'],
+          reply: 'Araç portföyümüzde çeşitli seçenekler bulunmaktadır.',
+          links: [{ text: '🚗 Araç İlanlarını Gör', url: '/arac-ilanlari' }]
+        },
+        {
+          match: ['proje', 'yeni proje', 'yapım aşamasında', 'inşaat projesi', 'projeler'],
+          reply: 'Devam eden ve tamamlanan konut projelerimizi inceleyin. Kat planları ve 3D turlarla detaylı bilgi alabilirsiniz.',
+          links: [{ text: '🏗️ Projelerimizi Gör', url: '/projeler' }, { text: '📐 Kat Planları', url: '/kat-planlari' }]
+        },
+        {
+          match: ['fiyat', 'ne kadar', 'kaç para', 'fiyatlar', 'ücret', 'değer', 'değerleme', 'metrekare fiyatı'],
+          reply: 'Fiyatlar konuma, büyüklüğe ve projeye göre değişmektedir. Güncel fiyat bilgisi için sizi arayalım.',
+          links: [{ text: '📞 +90 533 622 74 93', url: 'tel:+905336227493' }, { text: '✉️ İletişim Formu', url: '/iletisim' }]
+        },
+        {
+          match: ['iletişim', 'telefon', 'ara', 'mail', 'adres', 'nerede', 'ofis', 'konum', 'ulaşmak'],
+          reply: 'Bize ulaşmak için:\n📍 Tabaklar Mh. Haznedarlar Sk. No: 63/2, Bolu\n⏰ Hafta içi 09:00 – 18:30',
+          links: [{ text: '📞 Hemen Ara', url: 'tel:+905336227493' }, { text: '✉️ Mesaj Gönder', url: '/iletisim' }]
+        },
+        {
+          match: ['hakkında', 'kimsiniz', 'siz kimsiniz', 'firma', 'şirket', 'çakmaklar', 'hakkımızda', 'tarihçe', 'deneyim'],
+          reply: 'Çakmaklar Grup İnşaat; Bolu\'da yılların deneyimiyle konut projeleri, satılık ve kiralık gayrimenkul ile araç portföyü sunan köklü bir firmadır.',
+          links: [{ text: '👥 Biz Kimiz', url: '/biz-kimiz' }]
+        },
+        {
+          match: ['haberler', 'blog', 'duyuru', 'etkinlik', 'yenilik'],
+          reply: 'Güncel haberlerimiz ve duyurularımız için haber sayfamızı ziyaret edin.',
+          links: [{ text: '📰 Haberler', url: '/haberler' }]
+        },
+      ];
+
+      const DEFAULT_REPLY = 'Anladım! Size daha iyi yardımcı olmak için lütfen ofisimizi arayın veya iletişim formumuzu doldurun.';
+      const DEFAULT_LINKS = [{ text: '📞 Bizi Arayın', url: 'tel:+905336227493' }, { text: '✉️ İletişim', url: '/iletisim' }];
+
+      function findAnswer(text) {
+        const t = text.toLowerCase().trim();
+        for (const item of KB) {
+          if (item.match.some(kw => t.includes(kw))) return item;
+        }
+        return null;
+      }
+
+      // ── UI yardımcıları ───────────────────────────────────────────────
+      function scrollBottom() { msgBox.scrollTop = msgBox.scrollHeight; }
+
+      function addMsg(role, text, links) {
+        const row = document.createElement('div');
+        row.className = 'ai-msg-row ' + role;
+        const bub = document.createElement('div');
+        bub.className = 'ai-bubble';
+        bub.innerHTML = text.replace(/\n/g, '<br>');
+        row.appendChild(bub);
+        if (links && links.length) {
+          const lw = document.createElement('div');
+          lw.className = 'ai-link-btns';
+          links.forEach(l => {
+            const a = document.createElement('a');
+            a.className = 'ai-link-btn';
+            a.href = l.url;
+            a.textContent = l.text;
+            if (l.url.startsWith('/')) a.setAttribute('data-internal', '1');
+            else a.target = '_blank';
+            lw.appendChild(a);
+          });
+          bub.appendChild(lw);
+        }
+        msgBox.appendChild(row);
+        scrollBottom();
+        return row;
+      }
+
+      function addTyping() {
+        const row = document.createElement('div');
+        row.className = 'ai-msg-row bot';
+        row.innerHTML = '<div class="ai-bubble"><div class="ai-typing-dots"><span></span><span></span><span></span></div></div>';
+        msgBox.appendChild(row);
+        scrollBottom();
+        return row;
+      }
+
+      function respond(userText) {
+        addMsg('user', userText);
+        const typing = addTyping();
+        setTimeout(() => {
+          typing.remove();
+          const ans = findAnswer(userText);
+          if (ans) {
+            addMsg('bot', ans.reply, ans.links);
+          } else {
+            addMsg('bot', DEFAULT_REPLY, DEFAULT_LINKS);
+          }
+          // chip'leri gizle yazışmaya başlayınca
+          if (chipsWrap) chipsWrap.style.display = 'none';
+        }, 650);
+      }
+
+      // ── Chip tıklamaları ──────────────────────────────────────────────
+      document.querySelectorAll('.ai-chip').forEach(chip => {
+        chip.addEventListener('click', () => {
+          const q = chip.dataset.query || chip.textContent;
+          respond(q);
+        });
+      });
+
+      // ── Input gönder ──────────────────────────────────────────────────
+      function send() {
+        const txt = (input.value || '').trim();
+        if (!txt) return;
+        input.value = '';
+        respond(txt);
+      }
+      sendBtn.addEventListener('click', send);
+      input.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); send(); } });
+
+      // ── Panel aç/kapa ─────────────────────────────────────────────────
+      function openPanel() {
+        panel.classList.add('open');
+        trigger.classList.add('open');
+        panel.setAttribute('aria-hidden', 'false');
+        if (notify) notify.classList.add('hidden');
+        setTimeout(() => input && input.focus(), 320);
+      }
+      function closePanel() {
+        panel.classList.remove('open');
+        trigger.classList.remove('open');
+        panel.setAttribute('aria-hidden', 'true');
+      }
+      trigger.addEventListener('click', () => panel.classList.contains('open') ? closePanel() : openPanel());
+      if (closeBtn) closeBtn.addEventListener('click', closePanel);
+
+      // ── Bildirim balonu ───────────────────────────────────────────────
+      if (notify) {
+        notify.addEventListener('click', e => {
+          if (e.target.closest('#aiNotifyClose')) {
+            notify.classList.add('hidden');
+          } else {
+            openPanel();
+          }
+        });
+        setTimeout(() => notify.classList.add('hidden'), 7000);
+      }
+    })();

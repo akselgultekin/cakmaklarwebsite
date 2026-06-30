@@ -148,6 +148,9 @@ $router->post('/iletisim', 'ContactController', 'send');
 // AJAX: hızlı başvuru formu
 $router->post('/ajax/basvuru', 'ContactController', 'quickApply');
 
+// AJAX: AI asistan
+$router->post('/ajax/ai-chat', 'AiController', 'chat');
+
 // Legal Sayfalar
 $router->get('/gizlilik-politikasi', 'PageController', 'privacy');
 $router->get('/kvkk',                'PageController', 'kvkk');

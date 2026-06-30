@@ -124,6 +124,63 @@ $footerText = setting('footer_text', '© ' . date('Y') . ' Çakmaklar İnşaat. 
   </div>
 </footer>
 
+<!-- ── AI Asistan Widget ── -->
+<?php $aiPhone = setting('phone', '+90 533 622 74 93'); $aiPhoneClean = preg_replace('/[^0-9+]/', '', $aiPhone); ?>
+
+<!-- Bildirim balonu -->
+<div class="ai-notify" id="aiNotify">
+  <div class="ai-notify-body">
+    <div class="ai-notify-avatar">ÇAI</div>
+    <div>
+      <strong>Çakmaklar AI Asistanı</strong>
+      <span>Size nasıl yardımcı olabiliriz?</span>
+    </div>
+  </div>
+  <button class="ai-notify-close" id="aiNotifyClose" aria-label="Kapat"><i class="fa-solid fa-xmark"></i></button>
+</div>
+
+<!-- Trigger butonu -->
+<button class="ai-trigger-btn" id="aiTriggerBtn" aria-label="AI Asistanı Aç/Kapat">
+  <span class="ai-trigger-label">ÇAI</span>
+  <i class="fa-solid fa-xmark ai-trigger-close"></i>
+</button>
+
+<!-- Chat paneli -->
+<div class="ai-panel" id="aiPanel" aria-hidden="true">
+  <div class="ai-panel-header">
+    <div class="ai-panel-header-left">
+      <div class="ai-panel-avatar">ÇAI</div>
+      <div>
+        <strong>Çakmaklar AI Asistanı</strong>
+        <span><span class="ai-online-dot"></span>Size yardımcı olmaya hazır</span>
+      </div>
+    </div>
+    <button class="ai-panel-close" id="aiPanelClose" aria-label="Kapat"><i class="fa-solid fa-xmark"></i></button>
+  </div>
+
+  <a href="tel:<?= e($aiPhoneClean) ?>" class="ai-call-btn">
+    <i class="fa-solid fa-phone"></i> Bizi Arayın
+  </a>
+
+  <div class="ai-messages" id="aiMessages">
+    <div class="ai-msg-row bot">
+      <div class="ai-bubble">Merhaba, Çakmaklar İnşaat dijital asistanıyım. Projeler, ilanlar veya satış ofisi deneyimi hakkında nasıl yardımcı olabilirim?</div>
+    </div>
+  </div>
+
+  <div class="ai-chips" id="aiChips">
+    <button class="ai-chip" data-query="Satılık Ev">Satılık Ev</button>
+    <button class="ai-chip" data-query="Kiralık Dükkan">Kiralık Dükkan</button>
+    <button class="ai-chip" data-query="3D Tur">3D Tur</button>
+    <button class="ai-chip" data-query="Araç İlanı">Araç İlanı</button>
+  </div>
+
+  <div class="ai-input-row">
+    <input type="text" id="aiInput" class="ai-input" placeholder="Mesajınızı yazın" maxlength="300" autocomplete="off">
+    <button class="ai-send-btn" id="aiSendBtn" aria-label="Gönder"><i class="fa-solid fa-arrow-up"></i></button>
+  </div>
+</div>
+
 <!-- ── Çerez Onay Banneri ── -->
 <div id="cookieBanner" class="cookie-banner" role="dialog" aria-label="Çerez bildirimi" style="display:none;">
   <div class="cookie-inner">
