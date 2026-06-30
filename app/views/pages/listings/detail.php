@@ -11,46 +11,49 @@ $allImages = array_filter(array_merge(
 $allImages = array_values($allImages);
 ?>
 
-<!-- HERO / GALERİ -->
-<section style="padding:80px 0 34px;background:var(--soft);">
+<?php
+$heroBg = !empty($allImages[0]['image'])
+    ? e(uploadUrl($allImages[0]['image']))
+    : 'https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=2000&q=85';
+?>
+<!-- HERO -->
+<section class="hero" style="min-height:560px;display:flex;align-items:flex-end;padding:140px 0 60px;background:linear-gradient(90deg,rgba(10,31,68,.62),rgba(10,31,68,.18)),url('<?= $heroBg ?>') center/cover no-repeat;">
   <div class="container">
     <span class="eyebrow">
       <?php if ($listing['type'] === 'satilik'): ?>Satılık konut ilanı
       <?php elseif ($listing['type'] === 'kiralik'): ?>Kiralık konut ilanı
       <?php else: ?>Ticari ilan<?php endif; ?>
     </span>
-
-    <div style="display:grid;grid-template-columns:1fr auto;gap:24px;align-items:end;margin-top:12px;flex-wrap:wrap;">
-      <div>
-        <h1 style="font-size:clamp(32px,5vw,60px);color:var(--navy);"><?= e($listing['title']) ?></h1>
-        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:16px;">
-          <?php if ($listing['location']): ?>
-          <span style="background:#EAF3FF;color:#18589C;border:1px solid #CFE1F7;border-radius:999px;padding:6px 12px;font-size:13px;font-weight:600;">
-            <i class="fa-solid fa-location-dot"></i> <?= e($listing['location']) ?>
-          </span>
-          <?php endif; ?>
-          <?php foreach ($tags as $t): if(!trim($t)) continue; ?>
-          <span class="tag"><?= e($tagLabels[trim($t)] ?? trim($t)) ?></span>
-          <?php endforeach; ?>
-        </div>
-      </div>
-      <div style="font-family:Syne,sans-serif;color:var(--navy);font-size:clamp(26px,4vw,48px);font-weight:700;white-space:nowrap;">
+    <h1 style="color:#fff;margin:14px 0 18px;font-size:clamp(32px,5vw,64px);"><?= e($listing['title']) ?></h1>
+    <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
+      <?php if ($listing['location']): ?>
+      <span style="color:rgba(255,255,255,.82);font-size:15px;font-weight:600;">
+        <i class="fa-solid fa-location-dot"></i> <?= e($listing['location']) ?>
+      </span>
+      <?php endif; ?>
+      <?php foreach ($tags as $t): if(!trim($t)) continue; ?>
+      <span style="background:rgba(255,255,255,.18);color:#fff;border:1px solid rgba(255,255,255,.3);border-radius:999px;padding:5px 12px;font-size:12px;font-weight:600;backdrop-filter:blur(8px);">
+        <?= e($tagLabels[trim($t)] ?? trim($t)) ?>
+      </span>
+      <?php endforeach; ?>
+      <span style="margin-left:auto;font-family:Syne,sans-serif;color:#fff;font-size:clamp(26px,3.5vw,48px);font-weight:700;white-space:nowrap;text-shadow:0 2px 12px rgba(0,0,0,.25);">
         <?= $listing['price'] ? formatPrice($listing['price'], $listing['price_unit']) : 'Fiyat sorunuz' ?>
-      </div>
+      </span>
     </div>
+  </div>
+</section>
 
-    <!-- GALERİ -->
-    <div style="display:grid;grid-template-columns:1.35fr .65fr;gap:14px;margin:30px 0;">
-      <div style="height:520px;border-radius:var(--radius);overflow:hidden;">
-        <?php if (!empty($allImages[0])): ?>
+<!-- GALERİ -->
+<?php if (count($allImages) > 1): ?>
+<section style="padding:40px 0 0;background:var(--soft);">
+  <div class="container">
+    <div style="display:grid;grid-template-columns:1.35fr .65fr;gap:14px;">
+      <div style="height:480px;border-radius:var(--radius);overflow:hidden;">
         <img src="<?= e(uploadUrl($allImages[0]['image'])) ?>" alt="<?= e($listing['title']) ?>" style="width:100%;height:100%;object-fit:cover;">
-        <?php else: ?>
-        <img src="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=1500&q=82" alt="<?= e($listing['title']) ?>" style="width:100%;height:100%;object-fit:cover;">
-        <?php endif; ?>
       </div>
       <div style="display:grid;gap:14px;">
         <?php foreach (array_slice($allImages, 1, 2) as $img): ?>
-        <div style="height:253px;border-radius:var(--radius);overflow:hidden;">
+        <div style="height:233px;border-radius:var(--radius);overflow:hidden;">
           <img src="<?= e(uploadUrl($img['image'])) ?>" alt="<?= e($listing['title']) ?>" style="width:100%;height:100%;object-fit:cover;">
         </div>
         <?php endforeach; ?>
@@ -58,6 +61,7 @@ $allImages = array_values($allImages);
     </div>
   </div>
 </section>
+<?php endif; ?>
 
 <!-- LAYOUT: İçerik + Sidebar -->
 <div class="container" style="display:grid;grid-template-columns:1fr 360px;gap:34px;padding:60px 0 80px;">
