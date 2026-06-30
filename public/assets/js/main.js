@@ -443,68 +443,38 @@ const $ = (selector, scope = document) => scope.querySelector(selector);
       els.forEach(el => observer.observe(el));
     })();
 
+
 /* ============================================================
    Project Subnav — Scroll Spy
    ============================================================ */
 (function () {
   const subnav = document.getElementById('projectSubnav');
-  if (!subnav || !window.IntersectionObserver) return;
+  if (!subnav) return;
 
-  const links = Array.from(subnav.querySelectorAll('.psnav-link'));
+  const links = [...subnav.querySelectorAll('.psnav-link')];
   if (!links.length) return;
 
-  // Build map: anchor id → link element
-  const linkMap = {};
-  links.forEach(link => {
-    const href = link.getAttribute('href') || '';
-    const id = href.replace('#', '');
-    if (id) linkMap[id] = link;
-  });
+  const setActive = id =>
+    links.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + id));
 
-  const sectionIds = Object.keys(linkMap);
-  const sections = sectionIds
-    .map(id => document.getElementById(id))
+  const sections = links
+    .map(l => document.querySelector(l.getAttribute('href')))
     .filter(Boolean);
 
-  if (!sections.length) return;
+  const observer = new IntersectionObserver(entries => {
+    const visible = entries
+      .filter(e => e.isIntersecting)
+      .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+    if (visible) setActive(visible.target.id);
+  }, { rootMargin: '-80px 0px -52% 0px', threshold: [.1, .4] });
 
-  // Track which section is active
-  let activeId = null;
+  sections.forEach(s => observer.observe(s));
 
-  function setActive(id) {
-    if (id === activeId) return;
-    activeId = id;
-    links.forEach(l => l.classList.remove('active'));
-    if (id && linkMap[id]) {
-      linkMap[id].classList.add('active');
-      // Scroll subnav horizontally so active link is visible
-      const activeLink = linkMap[id];
-      const navInner = subnav.querySelector('.project-subnav-inner');
-      if (navInner) {
-        const linkLeft = activeLink.offsetLeft;
-        const linkRight = linkLeft + activeLink.offsetWidth;
-        const navLeft = navInner.scrollLeft;
-        const navRight = navLeft + navInner.offsetWidth;
-        if (linkLeft < navLeft) navInner.scrollLeft = linkLeft - 12;
-        else if (linkRight > navRight) navInner.scrollLeft = linkRight - navInner.offsetWidth + 12;
-      }
-    }
-  }
+  // Set initial active
+  setActive(location.hash.replace('#', '') || (sections[0] && sections[0].id));
 
-  // Use IntersectionObserver with a central rootMargin band
-  const io = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        setActive(entry.target.id);
-      }
-    });
-  }, {
-    rootMargin: '-20% 0px -60% 0px',
-    threshold: 0
-  });
-
-  sections.forEach(s => io.observe(s));
-
-  // Also set first link active by default on load
-  if (sections[0]) setActive(sections[0].id);
+  // Instant update on click
+  links.forEach(l => l.addEventListener('click', () =>
+    setActive(l.getAttribute('href').slice(1))
+  ));
 })();

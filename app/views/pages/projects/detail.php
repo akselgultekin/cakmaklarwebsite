@@ -35,53 +35,29 @@ $statusLabel  = $statusLabels[$project['status']] ?? $project['status'];
 <!-- HAKKINDA -->
 <section class="project-about-section" id="hakkinda">
   <div class="container">
-    <div class="project-about-layout">
-      <div class="project-about-content">
-        <span class="eyebrow">Proje hakkında</span>
-        <h2 class="project-about-lead">
-          <span class="project-about-name"><?= e($project['title']) ?></span><?php if ($project['short_desc']): ?>, <?= e($project['short_desc']) ?><?php endif; ?>
-        </h2>
-        <?php if ($project['description']): ?>
-        <div class="project-about-body">
-          <?= $project['description'] ?>
-        </div>
-        <?php endif; ?>
-      </div>
-      <div class="project-about-stats">
-        <?php if ($project['location']): ?>
-        <div class="pstat-card">
-          <i class="fa-solid fa-location-dot pstat-icon"></i>
-          <small class="pstat-label">Konum</small>
-          <strong class="pstat-val"><?= e($project['location']) ?></strong>
-        </div>
-        <?php endif; ?>
-        <div class="pstat-card">
-          <i class="fa-solid fa-circle-check pstat-icon"></i>
-          <small class="pstat-label">Durum</small>
-          <strong class="pstat-val" style="color:var(--turquoise);"><?= e($statusLabel) ?></strong>
-        </div>
-        <?php if (!empty($floor_plans)): ?>
-        <div class="pstat-card">
-          <i class="fa-solid fa-layer-group pstat-icon"></i>
-          <small class="pstat-label">Kat Planı</small>
-          <strong class="pstat-val"><?= count($floor_plans) ?> Tip</strong>
-        </div>
-        <?php endif; ?>
-        <?php if (!empty($listings)): ?>
-        <div class="pstat-card">
-          <i class="fa-solid fa-key pstat-icon"></i>
-          <small class="pstat-label">Aktif İlan</small>
-          <strong class="pstat-val"><?= count($listings) ?></strong>
-        </div>
-        <?php endif; ?>
-        <?php if ($project['tour_url'] || $project['tour_embed']): ?>
-        <div class="pstat-card">
-          <i class="fa-solid fa-cube pstat-icon"></i>
-          <small class="pstat-label">Sanal Tur</small>
-          <strong class="pstat-val">360° Mevcut</strong>
-        </div>
-        <?php endif; ?>
-      </div>
+    <span class="eyebrow">Proje hakkında</span>
+    <p class="project-lead">
+      <strong><?= e($project['title']) ?></strong><?php if ($project['short_desc']): ?>, <?= e($project['short_desc']) ?><?php endif; ?>
+    </p>
+    <?php if ($project['description']): ?>
+    <div class="project-about-body">
+      <?= $project['description'] ?>
+    </div>
+    <?php endif; ?>
+    <div class="project-specs">
+      <?php if ($project['location']): ?>
+      <div class="pspec"><strong><?= e($project['location']) ?></strong>Konum</div>
+      <?php endif; ?>
+      <div class="pspec"><strong style="color:var(--turquoise);"><?= e($statusLabel) ?></strong>Durum</div>
+      <?php if (!empty($floor_plans)): ?>
+      <div class="pspec"><strong><?= count($floor_plans) ?></strong>Kat Planı Tipi</div>
+      <?php endif; ?>
+      <?php if (!empty($listings)): ?>
+      <div class="pspec"><strong><?= count($listings) ?></strong>Aktif İlan</div>
+      <?php endif; ?>
+      <?php if ($project['tour_url'] || $project['tour_embed']): ?>
+      <div class="pspec"><strong>360°</strong>Sanal Tur</div>
+      <?php endif; ?>
     </div>
   </div>
 </section>
