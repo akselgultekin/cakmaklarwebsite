@@ -21,46 +21,67 @@ $statusLabel  = $statusLabels[$project['status']] ?? $project['status'];
 </section>
 
 <!-- SUBNAV -->
-<nav style="position:sticky;top:0;background:#fff;border-bottom:1px solid var(--line);z-index:15;">
-  <div class="container" style="height:64px;display:flex;align-items:center;gap:28px;font-weight:600;overflow-x:auto;">
-    <a href="#hakkinda" style="color:var(--muted);white-space:nowrap;">Hakkında</a>
-    <?php if (!empty($floor_plans)): ?><a href="#planlar" style="color:var(--muted);white-space:nowrap;">Kat Planları</a><?php endif; ?>
-    <?php if (!empty($images)): ?><a href="#galeri" style="color:var(--muted);white-space:nowrap;">Galeri</a><?php endif; ?>
-    <?php if (!empty($listings)): ?><a href="#ilanlar" style="color:var(--muted);white-space:nowrap;">Bu Projedeki İlanlar</a><?php endif; ?>
-    <a href="#iletisim" style="color:var(--muted);white-space:nowrap;">Bizi Arayın</a>
+<nav class="project-subnav" id="projectSubnav">
+  <div class="container project-subnav-inner">
+    <a class="psnav-link" href="#hakkinda">Hakkında</a>
+    <?php if (!empty($floor_plans)): ?><a class="psnav-link" href="#planlar">Kat Planları</a><?php endif; ?>
+    <?php if (!empty($images)): ?><a class="psnav-link" href="#galeri">Galeri</a><?php endif; ?>
+    <?php if (!empty($listings)): ?><a class="psnav-link" href="#ilanlar">Bu Projedeki İlanlar</a><?php endif; ?>
+    <a class="psnav-link" href="#iletisim">Bizi Arayın</a>
   </div>
 </nav>
 
 <main>
 <!-- HAKKINDA -->
-<section style="padding:90px 0;" id="hakkinda">
+<section class="project-about-section" id="hakkinda">
   <div class="container">
-    <span class="eyebrow">Proje hakkında</span>
-    <p style="font-size:clamp(20px,2.4vw,32px);color:var(--navy);line-height:1.4;max-width:900px;margin-top:14px;font-weight:600;">
-      <?= e($project['short_desc']) ?>
-    </p>
-    <?php if ($project['description']): ?>
-    <div style="margin-top:32px;color:var(--muted);line-height:1.75;max-width:780px;">
-      <?= $project['description'] ?>
-    </div>
-    <?php endif; ?>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:16px;margin-top:44px;max-width:640px;">
-      <?php if ($project['location']): ?>
-      <div style="background:var(--soft);border:1px solid var(--line);border-radius:var(--radius);padding:22px;">
-        <small style="color:var(--muted);display:block;margin-bottom:6px;font-weight:600;">Konum</small>
-        <strong style="font-family:Syne,sans-serif;font-size:16px;color:var(--navy);"><?= e($project['location']) ?></strong>
+    <div class="project-about-layout">
+      <div class="project-about-content">
+        <span class="eyebrow">Proje hakkında</span>
+        <h2 class="project-about-lead">
+          <span class="project-about-name"><?= e($project['title']) ?></span><?php if ($project['short_desc']): ?>, <?= e($project['short_desc']) ?><?php endif; ?>
+        </h2>
+        <?php if ($project['description']): ?>
+        <div class="project-about-body">
+          <?= $project['description'] ?>
+        </div>
+        <?php endif; ?>
       </div>
-      <?php endif; ?>
-      <div style="background:var(--soft);border:1px solid var(--line);border-radius:var(--radius);padding:22px;">
-        <small style="color:var(--muted);display:block;margin-bottom:6px;font-weight:600;">Durum</small>
-        <strong style="font-family:Syne,sans-serif;font-size:16px;color:var(--turquoise);"><?= e($statusLabel) ?></strong>
+      <div class="project-about-stats">
+        <?php if ($project['location']): ?>
+        <div class="pstat-card">
+          <i class="fa-solid fa-location-dot pstat-icon"></i>
+          <small class="pstat-label">Konum</small>
+          <strong class="pstat-val"><?= e($project['location']) ?></strong>
+        </div>
+        <?php endif; ?>
+        <div class="pstat-card">
+          <i class="fa-solid fa-circle-check pstat-icon"></i>
+          <small class="pstat-label">Durum</small>
+          <strong class="pstat-val" style="color:var(--turquoise);"><?= e($statusLabel) ?></strong>
+        </div>
+        <?php if (!empty($floor_plans)): ?>
+        <div class="pstat-card">
+          <i class="fa-solid fa-layer-group pstat-icon"></i>
+          <small class="pstat-label">Kat Planı</small>
+          <strong class="pstat-val"><?= count($floor_plans) ?> Tip</strong>
+        </div>
+        <?php endif; ?>
+        <?php if (!empty($listings)): ?>
+        <div class="pstat-card">
+          <i class="fa-solid fa-key pstat-icon"></i>
+          <small class="pstat-label">Aktif İlan</small>
+          <strong class="pstat-val"><?= count($listings) ?></strong>
+        </div>
+        <?php endif; ?>
+        <?php if ($project['tour_url'] || $project['tour_embed']): ?>
+        <div class="pstat-card">
+          <i class="fa-solid fa-cube pstat-icon"></i>
+          <small class="pstat-label">Sanal Tur</small>
+          <strong class="pstat-val">360° Mevcut</strong>
+        </div>
+        <?php endif; ?>
       </div>
-      <?php if ($project['tour_url'] || $project['tour_embed']): ?>
-      <div style="background:var(--soft);border:1px solid var(--line);border-radius:var(--radius);padding:22px;">
-        <small style="color:var(--muted);display:block;margin-bottom:6px;font-weight:600;">Sanal Tur</small>
-        <strong style="font-family:Syne,sans-serif;font-size:16px;color:var(--navy);">360° Mevcut</strong>
-      </div>
-      <?php endif; ?>
     </div>
   </div>
 </section>

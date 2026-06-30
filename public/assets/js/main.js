@@ -442,3 +442,69 @@ const $ = (selector, scope = document) => scope.querySelector(selector);
 
       els.forEach(el => observer.observe(el));
     })();
+
+/* ============================================================
+   Project Subnav — Scroll Spy
+   ============================================================ */
+(function () {
+  const subnav = document.getElementById('projectSubnav');
+  if (!subnav || !window.IntersectionObserver) return;
+
+  const links = Array.from(subnav.querySelectorAll('.psnav-link'));
+  if (!links.length) return;
+
+  // Build map: anchor id → link element
+  const linkMap = {};
+  links.forEach(link => {
+    const href = link.getAttribute('href') || '';
+    const id = href.replace('#', '');
+    if (id) linkMap[id] = link;
+  });
+
+  const sectionIds = Object.keys(linkMap);
+  const sections = sectionIds
+    .map(id => document.getElementById(id))
+    .filter(Boolean);
+
+  if (!sections.length) return;
+
+  // Track which section is active
+  let activeId = null;
+
+  function setActive(id) {
+    if (id === activeId) return;
+    activeId = id;
+    links.forEach(l => l.classList.remove('active'));
+    if (id && linkMap[id]) {
+      linkMap[id].classList.add('active');
+      // Scroll subnav horizontally so active link is visible
+      const activeLink = linkMap[id];
+      const navInner = subnav.querySelector('.project-subnav-inner');
+      if (navInner) {
+        const linkLeft = activeLink.offsetLeft;
+        const linkRight = linkLeft + activeLink.offsetWidth;
+        const navLeft = navInner.scrollLeft;
+        const navRight = navLeft + navInner.offsetWidth;
+        if (linkLeft < navLeft) navInner.scrollLeft = linkLeft - 12;
+        else if (linkRight > navRight) navInner.scrollLeft = linkRight - navInner.offsetWidth + 12;
+      }
+    }
+  }
+
+  // Use IntersectionObserver with a central rootMargin band
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        setActive(entry.target.id);
+      }
+    });
+  }, {
+    rootMargin: '-20% 0px -60% 0px',
+    threshold: 0
+  });
+
+  sections.forEach(s => io.observe(s));
+
+  // Also set first link active by default on load
+  if (sections[0]) setActive(sections[0].id);
+})();
