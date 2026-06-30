@@ -378,12 +378,14 @@
 
       // ── Bildirim balonu ───────────────────────────────────────────────
       if (notify) {
-        notify.addEventListener('click', e => {
-          if (e.target.closest('#aiNotifyClose')) {
+        if (notifyClose) {
+          notifyClose.addEventListener('click', e => {
+            e.stopPropagation();
             notify.classList.add('hidden');
-          } else {
-            openPanel();
-          }
+          });
+        }
+        notify.addEventListener('click', e => {
+          if (!e.target.closest('#aiNotifyClose')) openPanel();
         });
         setTimeout(() => notify.classList.add('hidden'), 7000);
       }
