@@ -377,16 +377,26 @@
       if (closeBtn) closeBtn.addEventListener('click', closePanel);
 
       // ── Bildirim balonu ───────────────────────────────────────────────
+      function hideNotify() {
+        if (!notify) return;
+        notify.style.display = 'none';
+      }
       if (notify) {
         if (notifyClose) {
           notifyClose.addEventListener('click', e => {
+            e.preventDefault();
             e.stopPropagation();
-            notify.classList.add('hidden');
+            hideNotify();
           });
         }
         notify.addEventListener('click', e => {
-          if (!e.target.closest('#aiNotifyClose')) openPanel();
+          if (e.target.closest('#aiNotifyClose')) {
+            hideNotify();
+          } else {
+            openPanel();
+            hideNotify();
+          }
         });
-        setTimeout(() => notify.classList.add('hidden'), 7000);
+        setTimeout(hideNotify, 7000);
       }
     })();

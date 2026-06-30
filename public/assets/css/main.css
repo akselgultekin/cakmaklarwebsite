@@ -1701,7 +1701,7 @@
       animation: ai-fadein .4s ease 1.2s both;
       transition: opacity .3s, transform .3s;
     }
-    .ai-notify.hidden { opacity: 0; pointer-events: none; transform: translateY(8px); }
+    .ai-notify.hidden { display: none; }
     @keyframes ai-fadein { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
     .ai-notify-body { display: flex; align-items: center; gap: 10px; flex: 1; min-width: 0; }
     .ai-notify-avatar {
