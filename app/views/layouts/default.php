@@ -81,8 +81,6 @@
 
 <?php require APP_PATH . '/views/layouts/footer.php'; ?>
 
-<!-- Smooth Scroll -->
-<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js"></script>
 <!-- Ana JS -->
 <script src="<?= SITE_URL ?>/public/assets/js/main.js"></script>
 <?php if (!empty($extra_js)) echo $extra_js; ?>
