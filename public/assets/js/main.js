@@ -400,3 +400,45 @@
         setTimeout(hideNotify, 7000);
       }
     })();
+
+    // ── Scroll Reveal ─────────────────────────────────────────────────────
+    (function () {
+      const SELECTORS = [
+        '.section-head',
+        '.project-card', '.listing-card', '.vehicle-card', '.news-card',
+        '.service-item', '.stat-item', '.feature-item', '.team-item',
+        '.contact-card', '.map', '.floor-item',
+        '.parallax-band', '.finance-block',
+        '.tour-screen', '.presentation-grid > *',
+        '.footer-cta-grid > *',
+      ].join(', ');
+
+      const els = document.querySelectorAll(SELECTORS);
+      if (!els.length || !window.IntersectionObserver) return;
+
+      // Gruplara göre sıra numarası ver (aynı parent içindekiler cascade eder)
+      const parentMap = new Map();
+      els.forEach(el => {
+        const parent = el.parentElement;
+        if (!parentMap.has(parent)) parentMap.set(parent, 0);
+        const idx = parentMap.get(parent);
+        parentMap.set(parent, idx + 1);
+
+        el.style.cssText += 'opacity:0;transform:translateY(28px);transition:opacity .78s cubic-bezier(.16,1,.3,1),transform .78s cubic-bezier(.16,1,.3,1);';
+        el.dataset.revealDelay = idx;
+      });
+
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+          const delay = parseInt(entry.target.dataset.revealDelay || 0) * 80;
+          setTimeout(() => {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+          }, delay);
+          observer.unobserve(entry.target);
+        });
+      }, { threshold: 0.08, rootMargin: '0px 0px -32px 0px' });
+
+      els.forEach(el => observer.observe(el));
+    })();
