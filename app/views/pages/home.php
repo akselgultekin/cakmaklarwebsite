@@ -286,12 +286,34 @@ $whatsapp = setting('whatsapp', '');
       <p>Anlaşmalı banka ve tasarruf finansmanı kurumlarıyla farklı ödeme çözümleri sunuyoruz.</p>
     </div>
     <div class="finance-grid" aria-label="Anlaşmalı finans kuruluşları">
-      <div class="finance-partner"><span class="partner-logo ziraat">Ziraat Bankası</span></div>
-      <div class="finance-partner"><span class="partner-logo halk">Halkbank</span></div>
-      <div class="finance-partner"><span class="partner-logo vakif">VakıfBank</span></div>
-      <div class="finance-partner"><span class="partner-logo kuveyt">Kuveyt Türk</span></div>
-      <div class="finance-partner"><span class="partner-logo eminevim">Eminevim</span></div>
-      <div class="finance-partner"><span class="partner-logo fuzul">FuzulEv</span></div>
+      <?php
+      $partners = [
+        ['name' => 'Ziraat Bankası',  'domain' => 'ziraatbank.com.tr',   'color' => '#D7252B', 'abbr' => 'ZB'],
+        ['name' => 'Halkbank',        'domain' => 'halkbank.com.tr',      'color' => '#174A83', 'abbr' => 'HB'],
+        ['name' => 'VakıfBank',       'domain' => 'vakifbank.com.tr',     'color' => '#F2AE00', 'abbr' => 'VB'],
+        ['name' => 'Garanti BBVA',    'domain' => 'garantibbva.com.tr',   'color' => '#009640', 'abbr' => 'GB'],
+        ['name' => 'İş Bankası',      'domain' => 'isbank.com.tr',        'color' => '#003087', 'abbr' => 'İB'],
+        ['name' => 'Yapı Kredi',      'domain' => 'yapikredi.com.tr',     'color' => '#003DA5', 'abbr' => 'YK'],
+        ['name' => 'Akbank',          'domain' => 'akbank.com',           'color' => '#D0232A', 'abbr' => 'AK'],
+        ['name' => 'DenizBank',       'domain' => 'denizbank.com',        'color' => '#0065BD', 'abbr' => 'DB'],
+        ['name' => 'Kuveyt Türk',     'domain' => 'kuveytturk.com.tr',   'color' => '#009B6E', 'abbr' => 'KT'],
+        ['name' => 'TEB',             'domain' => 'teb.com.tr',           'color' => '#00539F', 'abbr' => 'TEB'],
+        ['name' => 'Eminevim',        'domain' => 'eminevim.com.tr',      'color' => '#D0253A', 'abbr' => 'EM'],
+        ['name' => 'FuzulEv',         'domain' => 'fuzulev.com.tr',       'color' => '#2C5A9B', 'abbr' => 'FE'],
+      ];
+      foreach ($partners as $p): ?>
+      <div class="finance-partner">
+        <div class="partner-logo-wrap">
+          <img
+            src="https://logo.clearbit.com/<?= $p['domain'] ?>"
+            alt="<?= $p['name'] ?>"
+            class="partner-img"
+            onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <span class="partner-abbr" style="background:<?= $p['color'] ?>;display:none"><?= $p['abbr'] ?></span>
+        </div>
+        <span class="partner-name"><?= $p['name'] ?></span>
+      </div>
+      <?php endforeach; ?>
     </div>
   </div>
 </section>
