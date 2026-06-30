@@ -128,7 +128,7 @@ $footerText = setting('footer_text', '© ' . date('Y') . ' Çakmaklar İnşaat. 
 <?php $aiPhone = setting('phone', '+90 533 622 74 93'); $aiPhoneClean = preg_replace('/[^0-9+]/', '', $aiPhone); ?>
 
 <!-- Bildirim balonu -->
-<div class="ai-notify" id="aiNotify">
+<div class="ai-notify" id="aiNotify" onclick="if(event.target.closest('.ai-notify-close')){this.style.display='none';event.stopPropagation();}else{document.getElementById('aiTriggerBtn').click();}">
   <div class="ai-notify-body">
     <div class="ai-notify-avatar">ÇAI</div>
     <div>
@@ -136,7 +136,7 @@ $footerText = setting('footer_text', '© ' . date('Y') . ' Çakmaklar İnşaat. 
       <span>Size nasıl yardımcı olabiliriz?</span>
     </div>
   </div>
-  <button class="ai-notify-close" id="aiNotifyClose" aria-label="Kapat"><i class="fa-solid fa-xmark"></i></button>
+  <button class="ai-notify-close" aria-label="Kapat" onclick="event.stopPropagation();document.getElementById('aiNotify').style.display='none';"><i class="fa-solid fa-xmark"></i></button>
 </div>
 
 <!-- Trigger butonu -->
