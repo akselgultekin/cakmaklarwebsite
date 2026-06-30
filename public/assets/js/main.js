@@ -275,10 +275,25 @@ const $ = (selector, scope = document) => scope.querySelector(selector);
           reply: 'Güncel haberlerimiz ve duyurularımız için haber sayfamızı ziyaret edin.',
           links: [{ text: '📰 Haberler', url: '/haberler' }]
         },
+        {
+          match: ['3+1', '2+1', '4+1', '1+1', '5+1', 'stüdyo', 'oda', 'oda sayısı', 'kaç oda', 'daire tipi', 'daire çeşit'],
+          reply: 'Portföyümüzde 1+1\'den 5+1\'e kadar farklı oda tiplerinde satılık ve kiralık daireler bulunmaktadır. İlanlarımızı inceleyerek aradığınız tipe göre filtreleyebilirsiniz.',
+          links: [{ text: '🏠 Tüm İlanları Gör', url: '/satilik' }, { text: '🏡 Kiralık İlanlar', url: '/kiralik' }]
+        },
+        {
+          match: ['bahçe', 'teras', 'dubleks', 'çatı', 'bahçeli', 'teraslı', 'müstakil'],
+          reply: 'Bahçeli, teraslı ve dubleks daire seçeneklerimiz mevcut. Güncel portföyümüzde detaylı filtreleme yapabilirsiniz.',
+          links: [{ text: '🏠 Satılık İlanları Gör', url: '/satilik' }, { text: '📞 Özel Tercihleri Sor', url: 'tel:+905336227493' }]
+        },
+        {
+          match: ['yatırım', 'yatırımlık', 'kira getirisi', 'değer artışı', 'bölge', 'bolu', 'merkez'],
+          reply: 'Bolu merkezdeki projelerimiz yatırım açısından cazip konumlarda yer almaktadır. Kira getirisi ve değer artışı hakkında danışmanlarımız bilgi verebilir.',
+          links: [{ text: '🏗️ Projelerimizi İncele', url: '/projeler' }, { text: '📞 Yatırım Danışmanlığı', url: 'tel:+905336227493' }]
+        },
       ];
 
-      const DEFAULT_REPLY = 'Anladım! Size daha iyi yardımcı olmak için lütfen ofisimizi arayın veya iletişim formumuzu doldurun.';
-      const DEFAULT_LINKS = [{ text: '📞 Bizi Arayın', url: 'tel:+905336227493' }, { text: '✉️ İletişim', url: '/iletisim' }];
+      const DEFAULT_REPLY = 'Bu konuda size daha iyi yardımcı olabilmek için ilanlarımıza göz atabilir ya da danışmanlarımıza ulaşabilirsiniz.';
+      const DEFAULT_LINKS = [{ text: '🏠 Tüm İlanlar', url: '/satilik' }, { text: '📞 Bizi Arayın', url: 'tel:+905336227493' }, { text: '✉️ İletişim', url: '/iletisim' }];
 
       function findAnswer(text) {
         const t = text.toLowerCase().trim();
